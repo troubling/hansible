@@ -1,0 +1,12 @@
+---
+- hosts: hummingbird
+  become: yes
+  roles:
+    - common
+    - storage
+    - metadata
+    - ring
+    - proxy-server
+    - account-server
+    - container-server
+    - object-server
