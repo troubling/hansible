@@ -1,0 +1,12 @@
+---
+- hosts: hummingbird
+  become: yes
+  roles:
+    - { role: common, tags: ['common'] }
+    - { role: storage, tags: ['storage'] }
+    - { role: metadata, tags: ['storage'] }
+    - { role: ring, tags: ['ring'] }
+    - { role: proxy-server, tags: ['proxy-server'] }
+    - { role: account-server, tags: ['account-server'] }
+    - { role: container-server, tags: ['container-server'] }
+    - { role: object-server, tags: ['object-server'] }
