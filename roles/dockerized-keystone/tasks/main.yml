@@ -37,8 +37,8 @@
     regexp: "{{ item.regex }}"
     line: "{{ item.line }}"
   with_items:
-    - { regex: '^openstack endpoint create --region RegionOne swift public',  line: 'openstack endpoint create --region RegionOne swift public "$HTTP://{{ keystone_swift_endpoint }}/v1/AUTH_\$(tennant_id)s"' }
-    - { regex: '^openstack endpoint create --region RegionOne swift private', line: 'openstack endpoint create --region RegionOne swift private "$HTTP://{{ keystone_swift_endpoint }}/v1/AUTH_\$(tennant_id)s"' }
+    - { regex: '^openstack endpoint create --region RegionOne swift public',  line: 'openstack endpoint create --region RegionOne swift public "$HTTP://{{ keystone_swift_endpoint }}/v1/AUTH_\$(tenant_id)s"' }
+    - { regex: '^openstack endpoint create --region RegionOne swift private', line: 'openstack endpoint create --region RegionOne swift private "$HTTP://{{ keystone_swift_endpoint }}/v1/AUTH_\$(tenant_id)s"' }
     - { regex: '^openstack endpoint create --region RegionOne swift admin',   line: 'openstack endpoint create --region RegionOne swift admin "$HTTP://{{ keystone_swift_endpoint }}/v1"' }
 - name: Remove keystone container if it is running
   docker_container:
