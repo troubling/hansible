@@ -23,6 +23,7 @@
     url: https://troubling.github.io/hummingbird/bin/hummingbird
     dest: /usr/local/bin/hummingbird
     mode: 0755
+    force: yes
 - name: Create /etc/hummingbird
   file:
     path: /etc/hummingbird
