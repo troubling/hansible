@@ -43,6 +43,13 @@
     owner: hummingbird
     group: hummingbird
     mode: 0644
+- name: Copy config.monitoring
+  template:
+    src: templates/config.monitoring.j2
+    dest: /srv/hummingbird-monitoring/config.monitoring
+    mode: 0644
+    owner: hummingbird
+    group: hummingbird
 - name: Remove prometheus container if it is running
   docker_container:
     name: prometheus
