@@ -1,0 +1,3 @@
+- hosts: hummingbird
+  roles:
+     - { role: "filebeat" }
