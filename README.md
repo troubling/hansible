@@ -115,7 +115,7 @@ Generate the self signed CA cert (from the hummingbird dir):
 openssl req -config ansible/keys/ca.conf -key /path/to/key.pem -new -x509 -days 3560 -extensions ca_ext -out /path/to/ca.cert.pem -subj "/CN=Hummingbird CA"
 ```
 
-Filebeats
+Filebeat
 ---------
 This role was yanked from https://github.com/rcbops/rpc-role-filebeat.
 
