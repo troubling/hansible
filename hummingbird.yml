@@ -3,6 +3,7 @@
   become: yes
   roles:
     - { role: common, tags: ['common'] }
+    - { role: filebeat, tags: ['common'] }
     - { role: storage, tags: ['storage'] }
     - { role: metadata, tags: ['storage'] }
     - { role: ring, tags: ['ring'] }

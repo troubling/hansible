@@ -50,8 +50,22 @@
     path: /var/log/hummingbird
     state: directory
     mode: 0755
-    owner: hummingbird
-    group: hummingbird
+    owner: syslog
+    group: adm
+- name: Install rsyslog
+  apt:
+    name: rsyslog
+    state: present
+- name: Copy rsyslog config
+  copy:
+    src: 20-hbird.conf
+    dest: /etc/rsyslog.d/20-hbird.conf
+    mode: 0644
+- name: Restart rsyslog
+  service:
+    name: rsyslog
+    enabled: yes
+    state: restarted
 - name: Create /var/run/hummingbird
   file:
     path: /var/run/hummingbird

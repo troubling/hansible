@@ -119,6 +119,7 @@ Generate the self signed CA cert (from the hummingbird dir):
 openssl req -config ansible/keys/ca.conf -key /path/to/key.pem -new -x509 -days 3560 -extensions ca_ext -out /path/to/ca.cert.pem -subj "/CN=Hummingbird CA"
 ```
 
+
 Monitoring
 ----------
 ### Monitoring group variables
@@ -137,3 +138,18 @@ To install monitoring role:
 sudo ansible-playbook -i hosts.yml monitoring.yml --vault-id @prompt
 ```
 
+Filebeat
+---------
+This role was yanked from https://github.com/rcbops/rpc-role-filebeat.
+
+It can be minimally configured with two variables:
+
+```
+filebeat_logging_paths:
+  - paths:
+    - '/var/log/hummingbird/*.log'
+filebeat_logstash_hosts:
+  - '<logstash_host>'
+```
+
+For an INI inventory, I used a group\_vars/hummingbird yml file. If using a yml inventory, you can just put these directly in there.
