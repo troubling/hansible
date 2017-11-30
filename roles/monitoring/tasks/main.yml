@@ -1,0 +1,72 @@
+---
+- name: Install Docker
+  package:
+    name: docker.io
+    state: present
+- name: Install Docker Compose
+  get_url:
+    url: 'https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64'
+    dest: '/usr/local/bin/docker-compose'
+    force: True
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+- name: Make sure pip is installed
+  package:
+    name: python-pip
+    state: present
+- name: Install docker-py
+  pip:
+    name: docker-py
+    state: present
+- name: Make sure the hummingbird user is in the docker group
+  user:
+    name: hummingbird
+    append: yes
+    groups: docker
+- name: Check out hummingbird monitoring
+  git:
+    repo: https://github.com/nadeemsyed/hummingbird-monitoring.git
+    dest: /srv/hummingbird-monitoring
+    force: yes
+- name: copy prometheus config file
+  template:
+    src: templates/prometheus.yml.j2
+    dest: /srv/hummingbird-monitoring/prometheus/prometheus.yml
+    owner: hummingbird
+    group: hummingbird
+    mode: 0644
+- name: copy alertmanager config file
+  template:
+    src: templates/alertmanager.yml.j2
+    dest: /srv/hummingbird-monitoring/alertmanager/config.yml
+    owner: hummingbird
+    group: hummingbird
+    mode: 0644
+- name: Copy config.monitoring
+  template:
+    src: templates/config.monitoring.j2
+    dest: /srv/hummingbird-monitoring/config.monitoring
+    mode: 0644
+    owner: hummingbird
+    group: hummingbird
+- name: Remove prometheus container if it is running
+  docker_container:
+    name: prometheus
+    force_kill: yes
+    state: absent
+- name: Remove grafana container if it is running
+  docker_container:
+    name: grafana
+    force_kill: yes
+    state: absent
+- name: Remove alertmanager container if it is running
+  docker_container:
+    name: alertmanager
+    force_kill: yes
+    state: absent
+- name: Run docker-compose up
+  command: docker-compose up -d
+  args:
+    chdir: /srv/hummingbird-monitoring
+
