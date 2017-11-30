@@ -40,6 +40,10 @@ This playbook will install and configure the latest version of hummingbird to al
 
 This playbook will install a dockerized keystone that we use for development and testing.
 
+### monitoring.yml
+
+This playbook will install a dockerized prometheus, grafana & alertmanager.
+
 Secrets
 -------
 ```
@@ -114,3 +118,22 @@ Generate the self signed CA cert (from the hummingbird dir):
 ```
 openssl req -config ansible/keys/ca.conf -key /path/to/key.pem -new -x509 -days 3560 -extensions ca_ext -out /path/to/ca.cert.pem -subj "/CN=Hummingbird CA"
 ```
+
+Monitoring
+----------
+### Monitoring group variables
+
+Variable | Description
+-------- | -----------
+`grafana_admin_user` | Admin user for Grafana UI
+`grafana_admin_password` | Encrypted Grafana admin password
+`alertmanager_route` | Routes for Alertmanager
+`alertmanager_receivers` | Receivers config for alerts
+`prometheus_scrape_configs` | This section specifies set of targets and parameters describing how to scrape them
+
+To install monitoring role:
+
+```
+sudo ansible-playbook -i hosts.yml monitoring.yml --vault-id @prompt
+```
+

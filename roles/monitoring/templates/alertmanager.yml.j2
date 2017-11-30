@@ -1,0 +1,10 @@
+---
+{% if alertmanager_route is defined %}
+route:
+    {{ alertmanager_route | to_json | from_json | to_nice_yaml | indent(4) }}
+{% endif %}
+
+{% if alertmanager_receivers is defined %}
+receivers:
+{{ alertmanager_receivers | to_json | from_json | to_nice_yaml }}
+{% endif %}

@@ -1,0 +1,5 @@
+---
+- hosts: monitoring
+  become: yes
+  roles:
+    - monitoring
