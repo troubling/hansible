@@ -5,7 +5,7 @@
 
 [hummingbird:vars]
 # Devices that the object servers will use
-obj_devs='[]' l example: '["xvde", "xvdf", "xvdg"]'
+obj_devs='[]' ; example: '["xvde", "xvdf", "xvdg"]'
 # If you are using SSDs for conatiner/account services, add them to meta_devs
 meta_devs='[]' ; exmple: '["xvdb", "xvdc", "xvdd"]'
 proxy_port=8080
@@ -13,6 +13,7 @@ object_port=6000
 container_port=6001
 account_port=6002
 object_replicator_port=6500
+use_temp_auth=false
 # If you are using keystone, set the following:
 auth_uri=http://127.0.0.1:5000/
 auth_url=http://127.0.0.1:35357/

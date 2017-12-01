@@ -1,0 +1,15 @@
+# Sample Hummingbird AIO Inventory
+[hummingbird]
+127.0.0.1 service_ip=127.0.0.1 ansible_connection=local
+
+[hummingbird:vars]
+# Devices that the object servers will use
+obj_devs='["xvdb"]'
+proxy_port=8080
+object_port=6000
+container_port=6001
+account_port=6002
+object_replicator_port=6500
+use_temp_auth=true
+hash_prefix=aio
+hash_suffix=aio
