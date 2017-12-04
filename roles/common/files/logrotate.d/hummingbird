@@ -1,0 +1,13 @@
+/var/log/hummingbird/*.log
+{
+        rotate 14
+        daily
+        missingok
+        notifempty
+        delaycompress
+        compress
+        dateext
+        postrotate
+                invoke-rc.d rsyslog rotate > /dev/null
+        endscript
+}
