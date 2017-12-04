@@ -3,7 +3,7 @@ bind_ip = 0.0.0.0
 bind_port = {{ proxy_port }}
 log_level = INFO
 user = hummingbird
-tempauth_enabled = false
+tempauth_enabled = {{ use_temp_auth }}
 
 [app:proxy-server]
 allow_account_management = true
@@ -18,6 +18,7 @@ user_test_tester = testing .admin
 user_test2_tester2 = testing2 .admin
 user_test_tester3 = testing3
 
+{% if auth_uri is defined %}
 [filter:authtoken]
 paste.filter_factory = keystonemiddleware.auth_token:filter_factory
 auth_uri = {{ auth_uri }}
@@ -39,6 +40,7 @@ reseller_admin_role = ResellerAdmin
 GLANCE_service_roles = service
 default_domain_id = default
 allow_names_in_acls = false
+{% endif %}
 
 [filter:catch_errors]
 

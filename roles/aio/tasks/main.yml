@@ -1,0 +1,20 @@
+---
+- name: Link AIO data dir
+  file:
+    path: /srv/node/aio
+    state: link
+    src: '/srv/node/{{item}}1'
+    mode: 0755
+    owner: hummingbird
+    group: hummingbird
+  with_items: "{{obj_devs}}"
+- name: Copy the ring files
+  copy:
+    src: 'files/{{item}}'
+    dest: '/etc/hummingbird/{{item}}'
+    mode: 0644
+    force: yes
+  with_items:  
+    - account.ring.gz
+    - container.ring.gz
+    - object.ring.gz
