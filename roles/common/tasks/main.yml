@@ -58,8 +58,17 @@
     state: present
 - name: Copy rsyslog config
   copy:
-    src: 20-hbird.conf
+    src: rsyslog.d/20-hbird.conf
     dest: /etc/rsyslog.d/20-hbird.conf
+    mode: 0644
+- name: Install logrotate
+  apt:
+    name: logrotate
+    state: present
+- name: Copy logrotate config
+  copy:
+    src: logrotate.d/hummingbird
+    dest: /etc/logrotate.d/hummingbird
     mode: 0644
 - name: Restart rsyslog
   service:
