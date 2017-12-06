@@ -1,6 +1,5 @@
 ---
 # This will create a simple Hummingbird AIO on 1 node, using one device, and a ring with 1 replica
-# Use with hosts_aio inventory
 - hosts: hummingbird
   become: yes
   roles:
