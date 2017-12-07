@@ -18,6 +18,7 @@
     fstype: xfs
     dev: /dev/{{item}}1
     force: "{{ reset }}"
+    opts: "-L {{item}}1"
   with_items: "{{meta_devs}}"
 - name: Create dirs for mounts
   file:
@@ -30,7 +31,7 @@
 - name: Mount Filesystems
   mount:
     path: /srv/node/{{item}}1
-    src: /dev/{{item}}1
+    src: "LABEL={{item}}1"
     fstype: xfs
     opts: "noatime,nodiratime,nobarrier"
     state: mounted
