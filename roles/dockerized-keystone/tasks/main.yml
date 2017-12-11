@@ -23,7 +23,7 @@
 - name: Check out dockerized keystone
   git:
     repo: https://github.com/nadeemsyed/dockerized-keystone.git
-    dest: /srv/dockerized-keystnone
+    dest: /srv/dockerized-keystone
     force: yes
 - name: Update Makefile
   lineinfile:
