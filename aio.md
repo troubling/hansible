@@ -1,15 +1,11 @@
 
 # Creating a hummingbird AIO with hansible
 
-## Create a vm
+###  Create a vm
 The easiest way to get started is to install the AIO on a virtual machine
-
-### Phobos Environemnt
-Virtual Machine flavor use **vm-osa-aio**
 
 Item | Value | Reference
 --- | --- | ---
-Flavor ID | vm-osa-aio              |  
 RAM | 16384 
 DISK |   100GB
 VCPUS |     8
