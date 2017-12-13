@@ -1,16 +1,8 @@
-
 # Creating a hummingbird AIO with hansible
+This can be useful when needing to do some initial testing or dev work
 
 ###  Create a vm
-The easiest way to get started is to install the AIO on a virtual machine
-
-Item | Value | Reference
---- | --- | ---
-RAM | 16384 
-DISK |   100GB
-VCPUS |     8
-Attached Volume | 100GB | /dev/vdb
-
+Create a vm with an extra storage device (This document uses `/dev/vdb` as an example).  A Debian based distro is recommended as that is what we currently dev, test and deploy with.  These instructions can be easily adapted for other distros though.
 
 ### Install ansible
 You can use **bootstrap.sh** to install ansible
@@ -19,14 +11,13 @@ You can use **bootstrap.sh** to install ansible
 ```
 
 ### Edit any group_var variables
-For a basic AIO the only thing you need to change is the obj_dev refernce in **group_vars/hummingbird** to `"vdb"`
+For a basic AIO the only thing you need to change is the storage_devs refernce in **group_vars/hummingbird** to `"vdb"`
 
 
 ### Install hummingbird
 Run the **aio.yml** playbook to install hummingbird
 ```
-# password asdf
-ansible-playbook -i hosts aio.yml  --vault-id=@prompt
+ansible-playbook -i hosts aio.yml
 ```
 
 ### Verify the install was successful 

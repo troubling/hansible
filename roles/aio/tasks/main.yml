@@ -7,7 +7,7 @@
     mode: 0755
     owner: hummingbird
     group: hummingbird
-  with_items: "{{obj_devs}}"
+  with_items: "{{storage_devs}}"
 - name: Copy the ring files
   copy:
     src: 'files/{{item}}'
