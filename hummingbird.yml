@@ -5,7 +5,6 @@
     - { role: common, tags: ['common'] }
     - { role: filebeat, tags: ['common'] }
     - { role: storage, tags: ['storage'] }
-    - { role: metadata, tags: ['storage'] }
     - { role: ring, tags: ['ring'] }
     - { role: proxy-server, tags: ['proxy-server'] }
     - { role: account-server, tags: ['account-server'] }
