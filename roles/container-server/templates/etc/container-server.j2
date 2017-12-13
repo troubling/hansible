@@ -1,11 +1,12 @@
 [DEFAULT]
 bind_ip = {{ service_ip }}
-bind_port = {{ container_port }}
 devices = /srv/node
 mount_check = true
 user = hummingbird
 
 [app:container-server]
+bind_port = {{ container_port }}
 disk_limit = 0/0
 
 [container-replicator]
+bind_port = {{ container_replicator_port | default(container_port + 500) }}
