@@ -1,14 +1,11 @@
 ---
-# Devices that the object servers will use
-obj_devs:
+# Devices that will be used for storage
+storage_devs:
   - "xvdb"
-# If you are using SSDs for container/account servces, add them to meta_devs
-meta_devs: []
 proxy_port: 8080
 object_port: 6000
 container_port: 6001
 account_port: 6002
-object_replicator_port: 6500
 # Set the following to true if you would like to use tempauth
 use_temp_auth: true
 # Set these if you are using keytsone

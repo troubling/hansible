@@ -4,7 +4,7 @@ Hansible
 TL;DR
 -----
 
-1.  Install the latest version of [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html)
+1.  Install the latest version of [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html) or run `bootstrap.sh` if you are on a Debian based distro.
 2.  Edit the hosts file to have the hosts you want and modify variables as needed.
 3.  Create rings for the cluster.
 4.  Run the hummingbird playbook `ansible-playbook -i hosts hummingbird.yml` to install and configure the latest hummingbird.
@@ -18,12 +18,10 @@ Each storage node should be listed in the `hummingbird` group.  The `service_ip`
 
 Variable | Description
 -------- | -----------
-`obj_devs` | A list of devices used as storage for the object server.  This can also be overriden at the server level.
-`meta_devs` | A list of devices used as storage for the container and account servers.  This can be overriden at the server level.
+`storage_devs` | A list of devices used as storage for servers.  This can also be overriden at the server level.
 `proxy_port` | Port the proxy server will listen on.
 `container_port` | Port the container server will listen on.
 `account_port` | Port the account server will listen on.
-`object_replicator_port` | Port the object replicator will listen on.
 `auth_uri` | Auth URI for keystone
 `auth_url` | Auth URL for keystone
 `authtoken_username` | Username to use when validating auth with keystone.

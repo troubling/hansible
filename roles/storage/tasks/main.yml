@@ -6,12 +6,12 @@
     number: 1
     part_type: primary
     state: present
-  with_items: "{{ obj_devs }}"
+  with_items: "{{ storage_devs }}"
 - name: Unmount filesystems
   mount:
     path: /srv/node/{{item}}1
     state: absent
-  with_items: "{{ obj_devs }}"
+  with_items: "{{ storage_devs }}"
   when: reset == "yes"
 - name: Create XFS filesystems
   filesystem:
@@ -19,7 +19,7 @@
     dev: /dev/{{item}}1
     force: "{{ reset }}"
     opts: "-L {{item}}1"
-  with_items: "{{ obj_devs }}"
+  with_items: "{{ storage_devs }}"
 - name: Create dirs for mounts
   file:
     path: /srv/node/{{item}}1
@@ -27,7 +27,7 @@
     mode: 0755
     owner: root
     group: root
-  with_items: "{{ obj_devs }}"
+  with_items: "{{ storage_devs }}"
 - name: Mount filesystems
   mount:
     path: /srv/node/{{item}}1
@@ -35,10 +35,10 @@
     fstype: xfs
     opts: "noatime,nodiratime,nobarrier"
     state: mounted
-  with_items: "{{ obj_devs }}"
+  with_items: "{{ storage_devs }}"
 - name: Set permissions of mounted dirs
   file:
     path: /srv/node/{{item}}1
     owner: hummingbird
     group: hummingbird
-  with_items: "{{ obj_devs }}"
+  with_items: "{{ storage_devs }}"

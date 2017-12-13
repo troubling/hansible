@@ -10,6 +10,8 @@ disk_limit = 0/0
 account_rate_limit = 0/0
 
 [object-replicator]
+{% if object_replicator_port is defined %}
 bind_port = {{ object_replicator_port }}
+{% endif %}
 
 [object-auditor]
