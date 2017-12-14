@@ -2,10 +2,16 @@
 # Devices that will be used for storage
 storage_devs:
   - "xvdb"
+
 proxy_port: 8080
-object_port: 6000
-container_port: 6001
-account_port: 6002
+# Only change the following if you are not going to use default ports
+#object_port: 6000
+#container_port: 6001
+#account_port: 6002
+#object_replicator_port: 6500
+#container_replicator_port: 6501
+#account_replicator_port: 6502
+
 # Set the following to true if you would like to use tempauth
 use_temp_auth: true
 # Set these if you are using keytsone
