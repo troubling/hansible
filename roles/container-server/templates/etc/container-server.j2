@@ -5,8 +5,12 @@ mount_check = true
 user = hummingbird
 
 [app:container-server]
+{% if container_port is defined %}
 bind_port = {{ container_port }}
+{% endif %}
 disk_limit = 0/0
 
 [container-replicator]
+{% if container_port is defined or container_replicator_port is defined %}
 bind_port = {{ container_replicator_port | default(container_port + 500) }}
+{% endif %}
