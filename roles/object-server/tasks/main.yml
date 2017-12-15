@@ -28,14 +28,9 @@
   systemd:
     name: hummingbird-object
     enabled: yes
-    state: restarted
+    state: reloaded
 - name: Start  object replicator service
   systemd:
     name: hummingbird-object-replicator
     enabled: yes
-    state: restarted
-- name: Start andrewd service
-  systemd:
-    name: hummingbird-andrewd
-    enabled: yes
-    state: restarted
+    state: reloaded
