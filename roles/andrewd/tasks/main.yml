@@ -1,0 +1,28 @@
+---
+- name: Create /var/local/hummingbird
+  file:
+    path: /var/local/hummingbird
+    state: directory
+    mode: 0755
+    owner: hummingbird
+    group: hummingbird
+- name: Copy /etc/hummingbird/andrewd.conf
+  copy:
+    src: etc/andrewd.conf
+    dest: /etc/hummingbird/andrewd.conf
+    mode: 0644
+    owner: hummingbird
+    group: hummingbird
+- name: Copy andrewd systemd files
+  copy:
+    src: systemd/hummingbird-andrewd.service
+    dest: /lib/systemd/system/hummingbird-andrewd.service
+    mode: 0644
+- name: Reload systemd configs
+  systemd:
+    daemon_reload: yes
+- name: Start andrewd
+  systemd:
+    name: hummingbird-andrewd
+    enabled: yes
+    state: reloaded

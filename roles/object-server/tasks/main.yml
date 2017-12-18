@@ -16,11 +16,6 @@
     src: systemd/hummingbird-object-replicator.service
     dest: /lib/systemd/system/hummingbird-object-replicator.service
     mode: 0644
-- name: Copy andrewd systemd files
-  copy:
-    src: systemd/hummingbird-andrewd.service
-    dest: /lib/systemd/system/hummingbird-andrewd.service
-    mode: 0644
 - name: Reload systemd configs
   systemd:
     daemon_reload: yes

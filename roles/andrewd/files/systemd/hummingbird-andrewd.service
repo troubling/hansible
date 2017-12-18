@@ -2,19 +2,21 @@
 # http://0pointer.de/public/systemd-man/systemd.service.html
 # http://0pointer.de/public/systemd-man/systemd.exec.html
 [Unit]
-Description=hummingbird-object-auditor
+Description=hummingbird-andrewd
 After=syslog.target network.target
 [Service]
 Type=simple
 User=hummingbird
 Group=hummingbird
-ExecStart=/usr/local/bin/hummingbird object-auditor
+ExecStart=/usr/local/bin/hummingbird systemd start andrewd
+ExecReload=/usr/local/bin/hummingbird systemd reload $MAINPID
+ExecStop=/usr/local/bin/hummingbird systemd stop $MAINPID
 TimeoutStopSec=60
 Restart=on-failure
 RestartSec=5
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=hummingbird-object-auditor
+SyslogIdentifier=hummingbird-andrewd
 LimitCPU=infinity
 LimitFSIZE=infinity
 LimitDATA=infinity
