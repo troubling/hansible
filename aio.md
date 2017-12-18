@@ -14,6 +14,10 @@ You can use **bootstrap.sh** to install ansible
 For a basic AIO the only thing you need to change is the storage_devs refernce in **group_vars/hummingbird** to `"vdb"`
 
 
+### Edit the inventory file 
+Uncomment the line containing ~~127.0.0.1~~ in the **hummingbird** section only 
+
+
 ### Install hummingbird
 Run the **aio.yml** playbook to install hummingbird
 ```
@@ -26,6 +30,17 @@ Run hummingbird bench to make sure install worked
 hummingbird bench tests/temp_bench.conf
 ```
 
+### Simple clean up without dealing with drove mount
+ * Stop the service
+ * Remove the rings and configuration files
+ * Remove the hummingbird executable
+ * Remove the data directories for account, containers and objects
 
+```
+service hummingbird-* stop
+rm /etc/hummingbird/{*.gz,*.conf}
+rm /usr/local/bin/hummingbird
+rm -rf /srv/node/aio/{accounts,containers,objects}
+```
 
 
