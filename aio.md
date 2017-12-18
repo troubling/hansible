@@ -15,9 +15,9 @@ For a basic AIO the only thing you need to change is the storage_devs refernce i
 
 
 ### Install hummingbird
-Run the **aio.yml** playbook to install hummingbird
+Run the **aio.yml** playbook to install hummingbird and wait for the vault password prompt
 ```
-ansible-playbook -i hosts aio.yml
+ansible-playbook -i hosts aio.yml --vault-id @prompt
 ```
 
 ### Verify the install was successful 
