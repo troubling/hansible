@@ -18,11 +18,9 @@
     src: systemd/hummingbird-andrewd.service
     dest: /lib/systemd/system/hummingbird-andrewd.service
     mode: 0644
-- name: Reload systemd configs
-  systemd:
-    daemon_reload: yes
 - name: Start andrewd
   systemd:
     name: hummingbird-andrewd
     enabled: yes
     state: reloaded
+    daemon_reload: yes

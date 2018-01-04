@@ -16,16 +16,15 @@
     src: systemd/hummingbird-account-replicator.service
     dest: /lib/systemd/system/hummingbird-account-replicator.service
     mode: 0644
-- name: Reload systemd configs
-  systemd:
-    daemon_reload: yes
 - name: Start account service
   systemd:
     name: hummingbird-account
     enabled: yes
     state: reloaded
+    daemon_reload: yes
 - name: Start account replicator service
   systemd: 
     name: hummingbird-account-replicator
     enabled: yes
     state: reloaded
+    daemon_reload: yes
