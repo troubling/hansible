@@ -23,9 +23,9 @@
   systemd:
     name: hummingbird-account
     enabled: yes
-    state: restarted
+    state: reloaded
 - name: Start account replicator service
   systemd: 
     name: hummingbird-account-replicator
     enabled: yes
-    state: restarted
+    state: reloaded

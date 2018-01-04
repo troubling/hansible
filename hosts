@@ -1,7 +1,7 @@
 [hummingbird]
 # Hosts running hummingbird go here
 #   service_ip: the ip you want non-public services to run on
-#127.0.0.1 service_ip=127.0.0.1
+#127.0.0.1 service_ip=127.0.0.1 ansible_connection=local
 
 [keystone]
 # If you want to use dockerized keystone, put that host here
@@ -10,3 +10,7 @@
 [monitoring]
 # If you would like to set up a dockerized grafana for monitoring, put that host here
 #127.0.0.1 service_ip=127.0.0.1 ansible_connection=local
+
+[andrewd]
+# If you would like to set up andrewd
+#127.0.0.2 ansible_connection=local

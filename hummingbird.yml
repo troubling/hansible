@@ -10,3 +10,7 @@
     - { role: account-server, tags: ['account-server'] }
     - { role: container-server, tags: ['container-server'] }
     - { role: object-server, tags: ['object-server'] }
+- hosts: andrewd
+  become: yes
+  roles:
+    - { role: andrewd, tags: ['andrewd'] }

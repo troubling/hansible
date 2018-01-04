@@ -18,5 +18,4 @@
   systemd:
     name: hummingbird-proxy
     enabled: yes
-    state: restarted
-
+    state: reloaded

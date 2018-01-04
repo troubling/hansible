@@ -23,9 +23,9 @@
   systemd:
     name: hummingbird-container
     enabled: yes
-    state: restarted
+    state: reloaded
 - name: Start container replicator service
   systemd:
     name: hummingbird-container-replicator
     enabled: yes
-    state: restarted
+    state: reloaded
