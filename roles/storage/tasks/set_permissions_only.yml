@@ -1,0 +1,7 @@
+---
+- name: Set permissions of mounted dirs
+  file:
+     path: /srv/node/{{item}}1
+     owner: hummingbird
+     group: hummingbird
+  with_items: "{{ storage_devs }}"
