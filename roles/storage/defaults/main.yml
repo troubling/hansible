@@ -1,2 +1,3 @@
 ---
 reset: "no"
+setup_storage: True

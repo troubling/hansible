@@ -1,0 +1,6 @@
+---
+- name: Set permissions of mounted dirs
+  file:
+    path: /srv/node/
+    owner: hummingbird
+    group: hummingbird
