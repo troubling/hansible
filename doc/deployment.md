@@ -23,6 +23,8 @@ The following configuration is used for the examples in this documentation:
 Configuring the Ring
 --------------------
 
+If you do not yet have a Hummingbird binary, it can be downloaded directly from https://troubling.github.io/hummingbird/bin/hummingbird
+
 The ring is managed outside of Ansible with the `hummingbird` command line.  Ansible will distribute the ring files to the nodes of the cluster.  The ring files will need to be stored in `/etc/hummingbird` on the admin node:
 
   1.  Create the etc dir for the ring: `sudo mkdir -p /etc/hummingbird`
