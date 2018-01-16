@@ -6,7 +6,7 @@ Prerequisites
 
 The documentation below assumes:
 
-  1.  Ansible is installed on an admin machine or vm that has access to all nodes in the cluster.
+  1.  A recent version of Ansible is installed on an admin machine or vm that has access to all nodes in the cluster.  This can be easily accomplished by running the `bootstrap.sh` script.
   2.  The user that you will be runing the ansible script as has SUDO access to all nodes in the cluster.
 
 Example Configuration
@@ -23,6 +23,8 @@ The following configuration is used for the examples in this documentation:
 Configuring the Ring
 --------------------
 
+Note: Hansible will partition and format the devices by default, which will append a `1` to the device so be sure to use that when adding the device into the ring.  For example `sdb`, once partitioned, will be `sdb1`.
+
 If you do not yet have a Hummingbird binary, it can be downloaded directly from https://troubling.github.io/hummingbird/bin/hummingbird
 
 The ring is managed outside of Ansible with the `hummingbird` command line.  Ansible will distribute the ring files to the nodes of the cluster.  The ring files will need to be stored in `/etc/hummingbird` on the admin node:
@@ -32,6 +34,8 @@ The ring is managed outside of Ansible with the `hummingbird` command line.  Ans
 
 It can be useful to create a script to create the initial account, container and object rings.  When configuring the ring, a good starting point is to use `3` replicas, a part power of `22`, and a min part hours of `162` for most clusters.  The following example also uses the SATA devices for the object servers and the SSD devices for the account and container servers.  For more advanced info on using the ring, see the Hummingbird documentation.
 
+Note: The weight of the device (`100` in the example below) should be set to the total capacity of the device.
+
 `make_rings.sh`:
 ```
 #!/bin/bash
@@ -39,40 +43,45 @@ It can be useful to create a script to create the initial account, container and
 cd /etc/hummingbird
 
 hummingbird ring object.builder create 22 3 168
-hummingbird ring object.builder add r1z1-10.1.1.10:6000/sdd 100
-hummingbird ring object.builder add r1z1-10.1.1.10:6000/sde 100
-hummingbird ring object.builder add r1z1-10.1.1.10:6000/sdf 100
-hummingbird ring object.builder add r1z1-10.1.1.10:6000/sdg 100
-hummingbird ring object.builder add r1z2-10.1.1.11:6000/sdd 100
-hummingbird ring object.builder add r1z2-10.1.1.11:6000/sde 100
-hummingbird ring object.builder add r1z2-10.1.1.11:6000/sdf 100
-hummingbird ring object.builder add r1z2-10.1.1.11:6000/sdg 100
-hummingbird ring object.builder add r1z3-10.1.1.12:6000/sdd 100
-hummingbird ring object.builder add r1z3-10.1.1.12:6000/sde 100
-hummingbird ring object.builder add r1z3-10.1.1.12:6000/sdf 100
-hummingbird ring object.builder add r1z3-10.1.1.12:6000/sdg 100
+hummingbird ring object.builder add r1z1-10.1.1.10:6000/sdd1 100
+hummingbird ring object.builder add r1z1-10.1.1.10:6000/sde1 100
+hummingbird ring object.builder add r1z1-10.1.1.10:6000/sdf1 100
+hummingbird ring object.builder add r1z1-10.1.1.10:6000/sdg1 100
+hummingbird ring object.builder add r1z2-10.1.1.11:6000/sdd1 100
+hummingbird ring object.builder add r1z2-10.1.1.11:6000/sde1 100
+hummingbird ring object.builder add r1z2-10.1.1.11:6000/sdf1 100
+hummingbird ring object.builder add r1z2-10.1.1.11:6000/sdg1 100
+hummingbird ring object.builder add r1z3-10.1.1.12:6000/sdd1 100
+hummingbird ring object.builder add r1z3-10.1.1.12:6000/sde1 100
+hummingbird ring object.builder add r1z3-10.1.1.12:6000/sdf1 100
+hummingbird ring object.builder add r1z3-10.1.1.12:6000/sdg1 100
 hummingbird ring object.builder rebalance
 
 hummingbird ring container.builder create 22 3 168
-hummingbird ring container.builder add r1z1-10.1.1.10:6001/sdb 100
-hummingbird ring container.builder add r1z1-10.1.1.10:6001/sdc 100
-hummingbird ring container.builder add r1z2-10.1.1.11:6001/sdb 100
-hummingbird ring container.builder add r1z2-10.1.1.11:6001/sdc 100
-hummingbird ring container.builder add r1z3-10.1.1.12:6001/sdb 100
-hummingbird ring container.builder add r1z3-10.1.1.12:6001/sdc 100
+hummingbird ring container.builder add r1z1-10.1.1.10:6001/sdb1 100
+hummingbird ring container.builder add r1z1-10.1.1.10:6001/sdc1 100
+hummingbird ring container.builder add r1z2-10.1.1.11:6001/sdb1 100
+hummingbird ring container.builder add r1z2-10.1.1.11:6001/sdc1 100
+hummingbird ring container.builder add r1z3-10.1.1.12:6001/sdb1 100
+hummingbird ring container.builder add r1z3-10.1.1.12:6001/sdc1 100
 hummingbird ring container.builder rebalance
 
 hummingbird ring account.builder create 22 3 168
-hummingbird ring account.builder add r1z1-10.1.1.10:6001/sdb 100
-hummingbird ring account.builder add r1z1-10.1.1.10:6001/sdc 100
-hummingbird ring account.builder add r1z2-10.1.1.11:6001/sdb 100
-hummingbird ring account.builder add r1z2-10.1.1.11:6001/sdc 100
-hummingbird ring account.builder add r1z3-10.1.1.12:6001/sdb 100
-hummingbird ring account.builder add r1z3-10.1.1.12:6001/sdc 100
+hummingbird ring account.builder add r1z1-10.1.1.10:6002/sdb1 100
+hummingbird ring account.builder add r1z1-10.1.1.10:6002/sdc1 100
+hummingbird ring account.builder add r1z2-10.1.1.11:6002/sdb1 100
+hummingbird ring account.builder add r1z2-10.1.1.11:6002/sdc1 100
+hummingbird ring account.builder add r1z3-10.1.1.12:6002/sdb1 100
+hummingbird ring account.builder add r1z3-10.1.1.12:6002/sdc1 100
 hummingbird ring account.builder rebalance
 ```
 
-Note: It is important to keep the `*.builder` files for when modifications of the rings are made
+Set `make_rings.sh` to be executable and run:
+
+  1.  `chmod 755 make_rings.sh`
+  2.  `./make_rings.sh`
+
+Note: It is *VERY* important to keep and backup the `*.builder` files for when ring modifications are made.
 
 Setup Ansible for Hummingbird
 -----------------------------
@@ -95,7 +104,7 @@ Edit the group variables ('./group_vars/hummingbird') to set cluster specific in
 
 ```
 ---
-# Devices that will be used for storage
+# Devices that will be used for account, container and object storage
 storage_devs: ["sdb", "sdc", "sdd", "sde", "sdf", "sdg"]
 
 
@@ -126,3 +135,6 @@ Hummingbird should now be able to be installed with ansible:
 
 `ansible-playbook -i hosts hummingbird.yml`
 
+If that it completes successfully, then you should have a hummingbird cluster running.  To quickly test if things are running you can try to auth with:
+
+`curl http://10.1.1.10:8080/auth/v1.0 -Hx-auth-user:test:tester -Hx-auth-key:testing -i`
