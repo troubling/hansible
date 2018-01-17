@@ -38,7 +38,7 @@
     line: "{{ item.line }}"
   with_items:
     - { regex: '^openstack endpoint create --region RegionOne swift public',  line: 'openstack endpoint create --region RegionOne swift public "$HTTP://{{ keystone_swift_endpoint }}/v1/AUTH_\$(tenant_id)s"' }
-    - { regex: '^openstack endpoint create --region RegionOne swift private', line: 'openstack endpoint create --region RegionOne swift private "$HTTP://{{ keystone_swift_endpoint }}/v1/AUTH_\$(tenant_id)s"' }
+    - { regex: '^openstack endpoint create --region RegionOne swift internal', line: 'openstack endpoint create --region RegionOne swift internal "$HTTP://{{ keystone_swift_endpoint }}/v1/AUTH_\$(tenant_id)s"' }
     - { regex: '^openstack endpoint create --region RegionOne swift admin',   line: 'openstack endpoint create --region RegionOne swift admin "$HTTP://{{ keystone_swift_endpoint }}/v1"' }
 - name: Remove keystone container if it is running
   docker_container:
@@ -54,3 +54,23 @@
   make:
     chdir: /srv/dockerized-keystone
     target: bootstrap
+  when: not use_tls
+
+- name: Copy TLS crt, key & CA to keystone ssl directory
+  copy:
+    src: "{{ item.source }}"
+    dest: "{{ item.destination }}"
+    mode: 0644
+    owner: hummingbird
+    group: hummingbird
+  with_items:
+    - { source: '/etc/hummingbird/server.cert.pem', destination: '/srv/dockerized-keystone/ssl/keystone.crt' }
+    - { source: '/etc/hummingbird/server.key.pem', destination: '/srv/dockerized-keystone/ssl/keystone.key' }
+    - { source: '/etc/ssl/certs/ca-certificates.crt', destination: '/srv/dockerized-keystone/ssl/ca.crt'}
+  when: use_tls
+
+- name: Bootstrap Keystone Docker with TLS
+  make:
+    chdir: /srv/dockerized-keystone
+    target: bootstrap-ssl
+  when: use_tls
