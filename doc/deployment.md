@@ -100,7 +100,7 @@ Edit the inventory (`./hosts') to reflect your hardware configures.  For more in
 10.1.1.12 service_ip=10.1.1.12
 ```
 
-Edit the group variables ('./group_vars/hummingbird') to set cluster specific information.  For more information on group variables, see the Hansible documentation.  The group vars for the example configuration would look like:
+Edit the group variables ('./group_vars/hummingbird/hummingbird') to set cluster specific information.  For more information on group variables, see the Hansible documentation.  The group vars for the example configuration would look like:
 
 ```
 ---
