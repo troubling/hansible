@@ -22,9 +22,6 @@
   shell: curl -s https://api.github.com/repos/troubling/hummingbird/releases/latest | jq --raw-output '.assets[0] | .browser_download_url'
   when: hummingbird_version is not defined or hummingbird_version == ''
   register: hummingbird_binary_url
-- debug:
-    var: hummingbird_binary_url
-    verbosity: 4
 - name: Download latest hummingbird binary
   get_url:
     url: "{{ hummingbird_binary_url.stdout }}"
