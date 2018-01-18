@@ -50,6 +50,8 @@
     module: shell
     cmd: openssl ca -batch -config "{{playbook_dir}}/keys/ca.conf" -extensions intermediate_ext -notext -md sha256 -in "{{playbook_dir}}/keys/hummingbird.intermediate.csr.pem" -out "{{playbook_dir}}/keys/hummingbird.intermediate.cert.pem"
   when: stat_intermediate_key.stat.exists == False
+  environment:
+    subjectAltName: "IP:{{service_ip}}"
 - name: Look for host key
   local_action: 
     module: stat
