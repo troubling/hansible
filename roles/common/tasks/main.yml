@@ -18,12 +18,27 @@
     enabled: yes
     name: memcached
     state: restarted
+- name: Find latest hummingbird binary
+  shell: curl -s https://api.github.com/repos/troubling/hummingbird/releases/latest | jq --raw-output '.assets[0] | .browser_download_url'
+  when: hummingbird_version is not defined or hummingbird_version == ''
+  register: hummingbird_binary_url
+- debug:
+    var: hummingbird_binary_url
+    verbosity: 4
 - name: Download latest hummingbird binary
   get_url:
-    url: https://troubling.github.io/hummingbird/bin/hummingbird
+    url: "{{ hummingbird_binary_url.stdout }}"
     dest: /usr/local/bin/hummingbird
     mode: 0755
     force: yes
+  when: not hummingbird_binary_url|skipped
+- name: Download specific hummingbird binary
+  get_url:
+    url: "https://github.com/troubling/hummingbird/releases/download/{{hummingbird_version}}/hummingbird"
+    dest: /usr/local/bin/hummingbird
+    mode: 0755
+    force: yes
+  when: hummingbird_binary_url|skipped
 - name: Create /etc/hummingbird
   file:
     path: /etc/hummingbird
