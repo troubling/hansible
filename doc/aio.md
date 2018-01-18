@@ -11,7 +11,7 @@ You can use **bootstrap.sh** to install ansible
 ```
 
 ### Edit any group_var variables
-For a basic AIO the only thing you need to change is the storage_devs refernce in **group_vars/hummingbird** to `"vdb"`
+For a basic AIO the only thing you need to change is the storage_devs refernce in **group_vars/hummingbird/hummingbird** to `"vdb"`
 
 
 ### Edit the inventory file 
@@ -37,7 +37,7 @@ Perfrom these steps to stop the service, remove config, ring and exe files.  Als
  * Remove the hummingbird executable
  * Remove the data directories for account, containers and objects
  
-if you want to reset the disk completely then add `reset: "yes"` to the **group_vars/hummingbird** file
+if you want to reset the disk completely then add `reset: "yes"` to the **group_vars/hummingbird/hummingbird** file
 
 Cleanup commands
 ```
