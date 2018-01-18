@@ -18,6 +18,10 @@
     enabled: yes
     name: memcached
     state: restarted
+- name: Install jq
+  apt:
+    name: jq
+    state: present
 - name: Find latest hummingbird binary
   shell: curl -s https://api.github.com/repos/troubling/hummingbird/releases/latest | jq --raw-output '.assets[0] | .browser_download_url'
   when: hummingbird_version is not defined or hummingbird_version == ''
