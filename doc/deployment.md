@@ -146,6 +146,6 @@ By default, hansible will install the latest github release version. In a produc
 
 Example:
 
-hummingbird_version: "v0.0.2"
+`hummingbird_version: "v0.0.2"`
 
 When it is time to upgrade to "v0.0.3" simply update your group_vars/hummingbird/hummingbird and rerun the playbook. Services will be reloaded after the new binary is downloaded. If any upgrades require any additional steps, those will need to be documented in the hummingbird release version.
