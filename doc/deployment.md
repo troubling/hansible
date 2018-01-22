@@ -138,3 +138,14 @@ Hummingbird should now be able to be installed with ansible:
 If that it completes successfully, then you should have a hummingbird cluster running.  To quickly test if things are running you can try to auth with:
 
 `curl http://10.1.1.10:8080/auth/v1.0 -Hx-auth-user:test:tester -Hx-auth-key:testing -i`
+
+Upgrading Hummingbird
+---------------------
+
+By default, hansible will install the latest github release version. In a production environment, you likely want to install a specific version. The release tag can be specified in group_vars. A list of releases can be found here: https://github.com/troubling/hummingbird/releases
+
+Example:
+
+`hummingbird_version: "v0.0.2"`
+
+When it is time to upgrade to "v0.0.3" simply update your group_vars/hummingbird/hummingbird and rerun the playbook. Services will be reloaded after the new binary is downloaded. If any upgrades require any additional steps, those will need to be documented in the hummingbird release version.
