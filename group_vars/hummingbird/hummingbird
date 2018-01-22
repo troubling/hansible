@@ -2,6 +2,7 @@
 # Devices that will be used for storage
 storage_devs:
   - "xvdb"
+  #- "sdb"
 
 proxy_port: 8080
 # Only change the following if you are not going to use default ports
@@ -34,3 +35,5 @@ filebeat_logstash_hosts:
 filebeat_logging_paths:
   - paths:
     - '/var/log/hummingbird/*.log'
+# If you want to install a specific tagged release, otherwise it'll download the latest
+#hummingbird_version: "v0.0.2"

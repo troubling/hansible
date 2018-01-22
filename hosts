@@ -1,7 +1,7 @@
 [hummingbird]
 # Hosts running hummingbird go here
 #   service_ip: the ip you want non-public services to run on
-#127.0.0.1 service_ip=127.0.0.1 ansible_connection=local
+127.0.0.1 service_ip=127.0.0.1 ansible_connection=local
 
 [keystone]
 # If you want to use dockerized keystone, put that host here
