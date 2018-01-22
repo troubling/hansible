@@ -1,8 +1,8 @@
 ---
 # Devices that will be used for storage
 storage_devs:
-  #- "xvdb"
-  - "sdb"
+  - "xvdb"
+  #- "sdb"
 
 proxy_port: 8080
 # Only change the following if you are not going to use default ports
