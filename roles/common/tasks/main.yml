@@ -18,6 +18,10 @@
     enabled: yes
     name: memcached
     state: restarted
+- name: Install curl
+  apt:
+    name: curl
+    state: present
 - name: Install jq
   apt:
     name: jq
