@@ -1,4 +1,3 @@
----
 # Devices that will be used for storage
 storage_devs:
   - "xvdb"
