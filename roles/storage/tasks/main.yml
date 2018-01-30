@@ -1,6 +1,7 @@
 ---
-- include: setup_storage.yml
+- include: setup_storage.yml device={{item}}
   when: setup_storage
+  with_items: "{{ storage_devs }}"
   
 - include: set_permissions_only.yml
   when: not setup_storage
