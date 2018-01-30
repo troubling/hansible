@@ -33,17 +33,24 @@
 - name: Download latest hummingbird binary
   get_url:
     url: "{{ hummingbird_binary_url.stdout }}"
-    dest: /usr/local/bin/hummingbird
+    dest: /tmp/hummingbirdbinary
     mode: 0755
     force: yes
   when: not hummingbird_binary_url|skipped
 - name: Download specific hummingbird binary
   get_url:
     url: "https://github.com/troubling/hummingbird/releases/download/{{hummingbird_version}}/hummingbird"
-    dest: /usr/local/bin/hummingbird
+    dest: /tmp/hummingbirdbinary
     mode: 0755
     force: yes
   when: hummingbird_binary_url|skipped
+- name: Move binary into place
+  copy:
+    remote_src: yes
+    src: /tmp/hummingbirdbinary
+    dest: /usr/local/bin/hummingbird
+    mode: 0755
+    force: yes
 - name: Create /etc/hummingbird
   file:
     path: /etc/hummingbird
