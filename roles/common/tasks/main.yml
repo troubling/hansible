@@ -30,20 +30,35 @@
   shell: curl -s https://api.github.com/repos/troubling/hummingbird/releases/latest | jq --raw-output '.assets[0] | .browser_download_url'
   when: hummingbird_version is not defined or hummingbird_version == ''
   register: hummingbird_binary_url
+- name: Create download tmp dir
+  tempfile:
+    state: directory
+  register: downloadtmpdir
 - name: Download latest hummingbird binary
   get_url:
     url: "{{ hummingbird_binary_url.stdout }}"
-    dest: /usr/local/bin/hummingbird
+    dest: "{{downloadtmpdir.path}}/hummingbird"
     mode: 0755
     force: yes
   when: not hummingbird_binary_url|skipped
 - name: Download specific hummingbird binary
   get_url:
     url: "https://github.com/troubling/hummingbird/releases/download/{{hummingbird_version}}/hummingbird"
-    dest: /usr/local/bin/hummingbird
+    dest: "{{downloadtmpdir.path}}/hummingbird"
     mode: 0755
     force: yes
   when: hummingbird_binary_url|skipped
+- name: Move binary into place
+  copy:
+    remote_src: yes
+    src: "{{downloadtmpdir.path}}/hummingbird"
+    dest: /usr/local/bin/hummingbird
+    mode: 0755
+    force: yes
+- name: Remove temp dir
+  file:
+    state: absent
+    path: "{{downloadtmpdir.path}}"
 - name: Create /etc/hummingbird
   file:
     path: /etc/hummingbird
