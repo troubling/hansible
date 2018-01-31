@@ -26,7 +26,7 @@
     groups: docker
 - name: Check out hummingbird monitoring
   git:
-    repo: https://github.com/nadeemsyed/hummingbird-monitoring.git
+    repo: https://github.com/troubling/hummingbird-monitoring.git
     dest: /srv/hummingbird-monitoring
     force: yes
 - name: copy prometheus config file
