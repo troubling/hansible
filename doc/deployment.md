@@ -7,7 +7,9 @@ Prerequisites
 The documentation below assumes:
 
   1.  A recent version of Ansible is installed on an admin machine or vm that has access to all nodes in the cluster.  This can be easily accomplished by running the `bootstrap.sh` script.
-  2.  The user that you will be runing the ansible script as has SUDO access to all nodes in the cluster.
+  2.  The user that you will be runing the ansible script as has ssh keys and sudo access to all nodes in the cluster.
+  3.  The nodes in your cluster are running Ubuntu 16.04 or later.
+  4.  If you are running keystone auth, it is from Openstack Newton or later.
 
 Example Configuration
 ---------------------
