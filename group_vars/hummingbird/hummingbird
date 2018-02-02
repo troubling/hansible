@@ -2,15 +2,13 @@
 # Devices that will be used for storage
 storage_devs:
   - "xvdb"
-  - "xvdc"
-  - "xvdd"
 
 # If you use separate devices for separate services define them below (for ring creation):
 #object_devs:
 container_devs:
-  - "xvdc"
+#  - "xvdc"
 account_devs:
-  - "xvdd"
+#  - "xvdc"
 
 proxy_port: 8080
 # Only change the following if you are not going to use default ports

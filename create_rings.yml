@@ -19,11 +19,11 @@
       fail: msg="Bailing because rings already exist"
       when: object_builder.stat.exists or container_builder.stat.exists or account_builder.stat.exists
     - name: Create object ring
-      command: hummingbird ring /etc/hummingbird/object.builder create 12 3 168
+      command: hummingbird ring /etc/hummingbird/object.builder create 22 3 168
     - name: Create container ring
-      command: hummingbird ring /etc/hummingbird/container.builder create 12 3 168
+      command: hummingbird ring /etc/hummingbird/container.builder create 22 3 168
     - name: Create account ring
-      command: hummingbird ring /etc/hummingbird/account.builder create 12 3 168
+      command: hummingbird ring /etc/hummingbird/account.builder create 22 3 168
 
 
 - hosts: hummingbird
