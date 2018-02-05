@@ -1,0 +1,57 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  become: yes
+  roles:
+    - role: common
+      binary_only: yes
+  tasks:
+    - name: Check if object.builder exists
+      stat: path=/etc/hummingbird/object.builder
+      register: object_builder 
+    - name: Check if container.builder exists
+      stat: path=/etc/hummingbird/container.builder
+      register: container_builder 
+    - name: Check if account.builder exists
+      stat: path=/etc/hummingbird/account.builder
+      register: account_builder 
+    - name: Bail if rings exist
+      fail: msg="Bailing because rings already exist"
+      when: object_builder.stat.exists or container_builder.stat.exists or account_builder.stat.exists
+    - name: Create object ring
+      command: hummingbird ring /etc/hummingbird/object.builder create 22 3 168
+    - name: Create container ring
+      command: hummingbird ring /etc/hummingbird/container.builder create 22 3 168
+    - name: Create account ring
+      command: hummingbird ring /etc/hummingbird/account.builder create 22 3 168
+
+
+- hosts: hummingbird
+  become: yes
+  tasks:
+    - name: Add devices to object ring
+      command: hummingbird ring /etc/hummingbird/object.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ object_port | default(6000) }}/{{ item }} {{ hostvars[inventory_hostname]["ansible_devices"][item]["size"] | human_to_bytes/1024/1024/1024 }}
+      with_items: "{{ object_devs | default(storage_devs) }}"
+      delegate_to: 127.0.0.1
+      delegate_facts: True
+    - name: Add devices to container ring
+      command: hummingbird ring /etc/hummingbird/container.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ container_port | default(6001) }}/{{ item }} {{ hostvars[inventory_hostname]["ansible_devices"][item]["size"] | human_to_bytes/1024/1024/1024 }}
+      with_items: "{{ container_devs | default(storage_devs) }}"
+      delegate_to: 127.0.0.1
+      delegate_facts: True
+    - name: Add devices to account ring
+      command: hummingbird ring /etc/hummingbird/account.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ account_port | default(6002) }}/{{ item }} {{ hostvars[inventory_hostname]["ansible_devices"][item]["size"] | human_to_bytes/1024/1024/1024 }}
+      with_items: "{{ account_devs | default(storage_devs) }}"
+      delegate_to: 127.0.0.1
+      delegate_facts: True
+
+- hosts: 127.0.0.1
+  connection: local
+  become: yes
+  tasks:
+    - name: Rebalance object ring
+      command: hummingbird ring /etc/hummingbird/object.builder rebalance
+    - name: Create container ring
+      command: hummingbird ring /etc/hummingbird/container.builder rebalance
+    - name: Create account ring
+      command: hummingbird ring /etc/hummingbird/account.builder rebalance

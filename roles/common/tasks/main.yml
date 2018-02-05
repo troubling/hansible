@@ -8,16 +8,19 @@
   apt:
     name: memcached
     state: present
+  when: binary_only is not defined
 - name: Configure memcached
   lineinfile:
     path: /etc/memcached.conf
     regexp: '^127\.0\.0\.1'
     line: '-l {{ service_ip }}'
+  when: binary_only is not defined
 - name: Restart memcached
   service:
     enabled: yes
     name: memcached
     state: restarted
+  when: binary_only is not defined
 - name: Install curl
   apt:
     name: curl
@@ -73,6 +76,7 @@
     mode: 0644
     owner: hummingbird
     group: hummingbird
+  when: binary_only is not defined
 - name: Create /var/cache/swift
   file:
     path: /var/cache/swift
@@ -80,6 +84,7 @@
     mode: 0755
     owner: hummingbird
     group: hummingbird
+  when: binary_only is not defined
 - name: Create /var/log/hummingbird
   file:
     path: /var/log/hummingbird
@@ -87,29 +92,35 @@
     mode: 0755
     owner: syslog
     group: adm
+  when: binary_only is not defined
 - name: Install rsyslog
   apt:
     name: rsyslog
     state: present
+  when: binary_only is not defined
 - name: Copy rsyslog config
   copy:
     src: rsyslog.d/20-hbird.conf
     dest: /etc/rsyslog.d/20-hbird.conf
     mode: 0644
+  when: binary_only is not defined
 - name: Install logrotate
   apt:
     name: logrotate
     state: present
+  when: binary_only is not defined
 - name: Copy logrotate config
   copy:
     src: logrotate.d/hummingbird
     dest: /etc/logrotate.d/hummingbird
     mode: 0644
+  when: binary_only is not defined
 - name: Restart rsyslog
   service:
     name: rsyslog
     enabled: yes
     state: restarted
+  when: binary_only is not defined
 - name: Create /var/run/hummingbird
   file:
     path: /var/run/hummingbird
@@ -124,3 +135,4 @@
     mode: 0755
     owner: hummingbird
     group: hummingbird
+  when: binary_only is not defined
