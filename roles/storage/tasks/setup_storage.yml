@@ -5,6 +5,10 @@
     device: /dev/{{device}}
     state: info
   register: parted_result
+- name: Ensure xfsprogs is installed
+  apt:
+    name: xfsprogs
+    state: latest
 - name: Create XFS partitions
   parted:
     device: /dev/{{device}}
