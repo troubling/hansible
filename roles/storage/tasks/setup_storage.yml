@@ -5,7 +5,7 @@
     device: /dev/{{device}}
     state: info
   register: parted_result
-- name: Ensure xfsporgs is installed
+- name: Ensure xfsprogs is installed
   apt:
     name: xfsprogs
     state: latest
