@@ -5,9 +5,9 @@ storage_devs:
 
 # If you use separate devices for separate services define them below (for ring creation):
 #object_devs:
-container_devs:
+#container_devs:
 #  - "xvdc"
-account_devs:
+#account_devs:
 #  - "xvdc"
 
 proxy_port: 8080
@@ -43,3 +43,5 @@ filebeat_logging_paths:
     - '/var/log/hummingbird/*.log'
 # If you want to install a specific tagged release, otherwise it'll download the latest
 #hummingbird_version: "v1.0.0"
+# Or if you want to install the latest dev build
+#hummingbird_version: "dev"

@@ -5,6 +5,10 @@
   roles:
     - role: common
       binary_only: yes
+  pre_tasks:
+    - name: Load hummingbird vars
+      include_vars:
+        file: group_vars/hummingbird/hummingbird
   tasks:
     - name: Check if object.builder exists
       stat: path=/etc/hummingbird/object.builder
