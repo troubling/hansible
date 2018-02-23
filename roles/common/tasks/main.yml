@@ -54,7 +54,7 @@
   args:
     chdir: "{{downloadtmpdir.path}}"
     creates: "{{downloadtmpdir.path}}/hummingbird"
-  when: hummingbird_binary_url|skipped
+  when: hummingbird_version is defined and hummingbird_version != "dev"
 - name: Move binary into place
   copy:
     remote_src: yes
