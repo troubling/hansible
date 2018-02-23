@@ -38,18 +38,22 @@
     state: directory
   register: downloadtmpdir
 - name: Download latest hummingbird binary
-  get_url:
-    url: "{{ hummingbird_binary_url.stdout }}"
-    dest: "{{downloadtmpdir.path}}/hummingbird"
-    mode: 0755
-    force: yes
+  command: wget {{ hummingbird_binary_url.stdout }}
+  args:
+    chdir: "{{downloadtmpdir.path}}"
+    creates: "{{downloadtmpdir.path}}/hummingbird"
   when: not hummingbird_binary_url|skipped
+- name: Download latest dev hummingbird binary
+  command: wget https://troubling.github.io/hummingbird/bin/hummingbird
+  args:
+    chdir: "{{downloadtmpdir.path}}"
+    creates: "{{downloadtmpdir.path}}/hummingbird"
+  when: hummingbird_version is defined and hummingbird_version == "dev"
 - name: Download specific hummingbird binary
-  get_url:
-    url: "https://github.com/troubling/hummingbird/releases/download/{{hummingbird_version}}/hummingbird"
-    dest: "{{downloadtmpdir.path}}/hummingbird"
-    mode: 0755
-    force: yes
+  command: wget https://github.com/troubling/hummingbird/releases/download/{{hummingbird_version}}/hummingbird
+  args:
+    chdir: "{{downloadtmpdir.path}}"
+    creates: "{{downloadtmpdir.path}}/hummingbird"
   when: hummingbird_binary_url|skipped
 - name: Move binary into place
   copy:
