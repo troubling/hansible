@@ -29,6 +29,39 @@
   apt:
     name: jq
     state: present
+- name: Create download tmp dir
+  tempfile:
+    state: directory
+  register: downloadtmpdir
+  run_once: True
+  delegate_to: localhost
+- name: Find latest hummingbird binary
+  shell: curl -s https://api.github.com/repos/troubling/hummingbird/releases/latest | jq --raw-output '.assets[0] | .browser_download_url'
+  when: hummingbird_version is not defined or hummingbird_version == ''
+  register: hummingbird_binary_url
+  run_once: True
+  delegate_to: localhost
+- name: Download latest hummingbird binary
+  command: wget {{ hummingbird_binary_url.stdout }}
+  args:
+    chdir: "{{downloadtmpdir.path}}"
+  when: not hummingbird_binary_url|skipped
+  run_once: True
+  delegate_to: localhost
+- name: Download latest dev hummingbird binary
+  command: wget https://troubling.github.io/hummingbird/bin/hummingbird
+  args:
+    chdir: "{{downloadtmpdir.path}}"
+  when: hummingbird_version is defined and hummingbird_version == "dev"
+  run_once: True
+  delegate_to: localhost
+- name: Download specific hummingbird binary
+  command: wget https://github.com/troubling/hummingbird/releases/download/{{hummingbird_version}}/hummingbird
+  args:
+    chdir: "{{downloadtmpdir.path}}"
+  when: hummingbird_version is defined and hummingbird_version != "dev"
+  run_once: True
+  delegate_to: localhost
 - name: Copy binary to node
   copy:
     src: "{{downloadtmpdir.path}}/hummingbird"
