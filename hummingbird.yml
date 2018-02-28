@@ -1,5 +1,4 @@
 ---
-
 - hosts: hummingbird
   become: yes
   roles:
