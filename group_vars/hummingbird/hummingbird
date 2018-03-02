@@ -45,3 +45,6 @@ filebeat_logging_paths:
 #hummingbird_version: "v1.0.0"
 # Or if you want to install the latest dev build
 hummingbird_version: "dev"
+
+# Default state of all nodes
+state: "up"
