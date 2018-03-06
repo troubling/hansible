@@ -35,6 +35,7 @@
 
 
 - hosts: hummingbird
+  serial: 1
   become: yes
   tasks:
     - name: Create cust fact dir
@@ -57,7 +58,7 @@
     - name: Add devices to object ring
       command: hummingbird ring /etc/hummingbird/object.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ object_port | default(6000) }}/{{ item }} {{ hostvars[inventory_hostname]["ansible_devices"][ansible_local.devmap[item]]["size"] | human_to_bytes/1024/1024/1024 | round }}
       with_items: "{{ object_devs | default(storage_devs) }}"
-      when: item not in object_ring_devices and state != "remove"
+      when: item not in object_ring_devices and state != "remove" and ansible_local.devmap[item] is defined
       delegate_to: 127.0.0.1
       delegate_facts: True
     - name: Remove devices from object ring if the node is removed
@@ -74,7 +75,7 @@
     - name: Add devices to container ring
       command: hummingbird ring /etc/hummingbird/container.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ container_port | default(6001) }}/{{ item }} {{ hostvars[inventory_hostname]["ansible_devices"][ansible_local.devmap[item]]["size"] | human_to_bytes/1024/1024/1024 | round }}
       with_items: "{{ container_devs | default(storage_devs) }}"
-      when: item not in container_ring_devices and state != "remove"
+      when: item not in container_ring_devices and state != "remove" and ansible_local.devmap[item] is defined
       delegate_to: 127.0.0.1
       delegate_facts: True
     - name: Remove devices from container ring if the node is removed
@@ -91,7 +92,7 @@
     - name: Add devices to account ring
       command: hummingbird ring /etc/hummingbird/account.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ account_port | default(6002) }}/{{ item }} {{ hostvars[inventory_hostname]["ansible_devices"][ansible_local.devmap[item]]["size"] | human_to_bytes/1024/1024/1024 | round}}
       with_items: "{{ account_devs | default(storage_devs) }}"
-      when: item not in account_ring_devices and state != "remove"
+      when: item not in account_ring_devices and state != "remove" and ansible_local.devmap[item] is defined
       delegate_to: 127.0.0.1
       delegate_facts: True
     - name: Remove devices from account ring if the node is removed
@@ -106,7 +107,7 @@
   tasks:
     - name: Rebalance object ring
       command: hummingbird ring /etc/hummingbird/object.builder rebalance
-    - name: Create container ring
+    - name: Rebalance container ring
       command: hummingbird ring /etc/hummingbird/container.builder rebalance
-    - name: Create account ring
+    - name: Rebalance account ring
       command: hummingbird ring /etc/hummingbird/account.builder rebalance
