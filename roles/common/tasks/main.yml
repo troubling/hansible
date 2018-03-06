@@ -38,7 +38,10 @@
 - name: Change download perms
   file:
     path: "{{ downloadtmpdir.path }}"
+    state: directory
     mode: 0755
+  run_once: True
+  delegate_to: localhost
 - name: Find latest hummingbird binary
   shell: curl -s https://api.github.com/repos/troubling/hummingbird/releases/latest | jq --raw-output '.assets[0] | .browser_download_url'
   when: hummingbird_version is not defined or hummingbird_version == ''
