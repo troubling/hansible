@@ -3,7 +3,11 @@ swift_hash_path_prefix = {{ hash_prefix }}
 swift_hash_path_suffix = {{ hash_suffix }}
 
 [storage-policy:0]
-name = Policy-0
-policy_type = replication
 default = yes
-aliases = yellow, orange
+name = {{ storage_policy_name }}
+policy_type = {{ storage_policy_type }}
+{% if storage_policy_type == "hec" %}
+data_frags = {{ storage_policy_data_frags }}
+parity_frags = {{ storage_policy_parity_frags }}
+nursery_replicas = {{ storage_policy_nursery_replicas }}
+{% endif %}
