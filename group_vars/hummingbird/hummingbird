@@ -4,20 +4,6 @@
 # Or if you want to install the latest dev build
 #hummingbird_version: "dev"
 
-# The following hash salts should be changed to something unique
-hash_prefix: changeme
-hash_suffix: changeme
-
-# This is an example of how you can store secret values in a vault
-# This key has a password of: asdf
-#hash_prefix: !vault |
-#      $ANSIBLE_VAULT;1.1;AES256
-#      63633134306130323436346333323935663363353037623366333639316334306134363138326230
-#      3661633333376135393033323339623766626635363833300a656134366337303036636338306633
-#      65303337643533396233613336363831613535366435646261393139393162393237613430313633
-#      3331323161313930370a616536316165383263386566656233303239306638643964303365373962
-#      65333264613738343936373831663366353663356135303530376434636262656630
-
 # Devices that will be used for storage
 storage_devs:
   - "xvdb"
@@ -40,11 +26,50 @@ proxy_port: 8080
 
 # Set the following to true if you would like to use tempauth
 use_temp_auth: true
-# Set these if you are using keytsone
+
+# Set the following if you are using keytsone
 auth_uri: http://127.0.0.1:5000/
 auth_url: http://127.0.0.1:35357/
 authtoken_username: swift
 authtoken_password: password
+
+# Filebeat support
+filebeat_logstash_hosts:
+  - "localhost"
+filebeat_logging_paths:
+  - paths:
+    - '/var/log/hummingbird/*.log'
+
+# NOTE! The following variables must *NOT* change after the cluster has been deployed for the first time
+
+# The following hash salts should be changed to something unique
+hash_prefix: changeme
+hash_suffix: changeme
+
+# This is an example of how you can store secret values in a vault
+# This key has a password of: asdf
+#hash_prefix: !vault |
+#      $ANSIBLE_VAULT;1.1;AES256
+#      63633134306130323436346333323935663363353037623366333639316334306134363138326230
+#      3661633333376135393033323339623766626635363833300a656134366337303036636338306633
+#      65303337643533396233613336363831613535366435646261393139393162393237613430313633
+#      3331323161313930370a616536316165383263386566656233303239306638643964303365373962
+#      65333264613738343936373831663366353663356135303530376434636262656630
+
+# Set the following to change the number of replicas for a ring (the default is 3)
+#object_ring_replicas: 3
+#container_ring_replicas: 3
+#account_ring_replicas: 3
+
+# Set the following to change the part power for a ring (the default is 22)
+#object_ring_part_power: 22
+#container_ring_part_power: 22
+#account_ring_part_power: 22
+
+# Set the following to change the min part hours for a ring (the default is 168)
+#object_ring_min_part_hours: 168
+#container_ring_min_part_hours: 168
+#account_ring_min_part_hours: 168
 
 # Storage policy definitions
 # The following is a standard 3 replica storage policy
@@ -61,9 +86,4 @@ storage_policy_type: replication
 # Default state of all nodes
 state: "up"
 
-filebeat_logstash_hosts:
-  - "localhost"
-filebeat_logging_paths:
-  - paths:
-    - '/var/log/hummingbird/*.log'
 
