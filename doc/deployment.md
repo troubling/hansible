@@ -18,8 +18,8 @@ The following configuration is used for the examples in this documentation:
 
 | Server | IP | SATA Devices | SSD Devices |
 | ------ | -- | ------------ | ----------- |
-| storage1 | 10.1.1.10 | /dev/sdd, /dev/sde, /dev/sdf, /dev/sdg | /dev/sdb, /dev/sdc | 
-| storage2 | 10.1.1.11 | /dev/sdd, /dev/sde, /dev/sdf, /dev/sdg | /dev/sdb, /dev/sdc | 
+| storage1 | 10.1.1.10 | /dev/sdd, /dev/sde, /dev/sdf, /dev/sdg | /dev/sdb, /dev/sdc |
+| storage2 | 10.1.1.11 | /dev/sdd, /dev/sde, /dev/sdf, /dev/sdg | /dev/sdb, /dev/sdc |
 | storage3 | 10.1.1.12 | /dev/sdd, /dev/sde, /dev/sdf, /dev/sdg | /dev/sdb, /dev/sdc |
 
 Setup Ansible for Hummingbird
@@ -76,11 +76,11 @@ Create the Initial Rings
 
 Rings will be created in the `/etc/hummingbird` directory on the current machine.  It is *VERY* important to keep backups of the `.builder` files as they will be needed when future ring changes are made.
 
-The `create_rings.yml` playbook will create a ring with each node in a separate zone.  It is also important that all machines in the cluster are available when running this playbook so that it can detect the device sizes to set a proper weight.
+The `rings.yml` playbook will create a ring with each node in a separate zone.  It is also important that all machines in the cluster are available when running this playbook so that it can detect the device sizes to set a proper weight.
 
 The rings should now be able to be created with ansible:
 
-`ansible-playbook -i hosts create_rings.yml`
+`ansible-playbook -i hosts rings.yml`
 
 Install Hummingbird with Ansible
 --------------------------------
@@ -102,4 +102,4 @@ Example:
 
 `hummingbird_version: "v0.0.2"`
 
-When it is time to upgrade to "v0.0.3" simply update your group_vars/hummingbird/hummingbird and rerun the playbook. Services will be reloaded after the new binary is downloaded. If any upgrades require any additional steps, those will need to be documented in the hummingbird release version.
+When it is time to upgrade to "v0.0.3" simply update your group_vars/hummingbird/hummingbird and rerun the playbook. Services will be reloaded after the new binary is downloaded. If an upgrade requires additional steps, they will be documented in the hummingbird release notes.
