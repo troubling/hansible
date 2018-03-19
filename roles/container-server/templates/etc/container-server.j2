@@ -8,7 +8,7 @@ user = hummingbird
 {% if container_port is defined %}
 bind_port = {{ container_port }}
 {% endif %}
-disk_limit = 0/0
+disk_limit = {{ container_disk_limit | default ("100/0") }}
 
 [container-replicator]
 {% if container_port is defined or container_replicator_port is defined %}
