@@ -49,6 +49,8 @@ allow_names_in_acls = false
 [filter:proxy-logging]
 
 [filter:ratelimit]
+account_db_max_writes_per_sec = {{ account_db_max_writes_per_sec | default(100) }}
+container_db_max_writes_per_sec = {{ container_db_max_writes_per_sec | default(100) }}
 
 [filter:dlo]
 
