@@ -102,4 +102,4 @@ Example:
 
 `hummingbird_version: "v0.0.2"`
 
-When it is time to upgrade to "v0.0.3" simply update your group_vars/hummingbird/hummingbird and rerun the playbook. Services will be reloaded after the new binary is downloaded. If an upgrade requireis additional steps, they will be documented in the hummingbird release notes.
+When it is time to upgrade to "v0.0.3" simply update your group_vars/hummingbird/hummingbird and rerun the playbook. Services will be reloaded after the new binary is downloaded. If an upgrade requires additional steps, they will be documented in the hummingbird release notes.
