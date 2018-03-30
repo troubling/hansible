@@ -79,8 +79,8 @@ storage_policy_type: replication
 # The following is an example of an EC storage policy
 # storage_policy_name: HEC
 # storage_policy_type: hec
-# storage_policy_data_frags: 4
-# storage_policy_parity_frags: 2
+# storage_policy_data_shards: 4
+# storage_policy_parity_shards: 2
 # storage_policy_nursery_replicas: 4
 
 # Default state of all nodes
