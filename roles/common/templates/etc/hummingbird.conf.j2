@@ -7,7 +7,7 @@ default = yes
 name = {{ storage_policy_name }}
 policy_type = {{ storage_policy_type }}
 {% if storage_policy_type == "hec" %}
-data_frags = {{ storage_policy_data_frags }}
-parity_frags = {{ storage_policy_parity_frags }}
+data_shards = {{ storage_policy_data_shards }}
+parity_shards = {{ storage_policy_parity_shards }}
 nursery_replicas = {{ storage_policy_nursery_replicas }}
 {% endif %}
