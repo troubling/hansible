@@ -14,3 +14,7 @@
 [andrewd]
 # If you would like to set up andrewd
 #127.0.0.2 ansible_connection=local
+
+[test]
+# Host to run tests from
+127.0.0.1 ansible_connection=local

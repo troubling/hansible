@@ -1,0 +1,64 @@
+---
+- name: Copy bench config
+  template:
+    src: templates/bench.conf.j2
+    dest: /etc/hummingbird/bench.conf
+    mode: 0644
+    owner: hummingbird
+    group: hummingbird
+  when: test_bench_run
+- name: Run hummingbird benchmark
+  command: "hummingbird bench /etc/hummingbird/bench.conf"
+  register: bench_out
+  when: test_bench_run
+- name: Show benchmark results
+  debug:
+    var: bench_out.stdout_lines
+  when: test_bench_run
+- name: Install prereqs for swift functional tests
+  apt:
+    name: ["gcc", "python-eventlet", "python-mock", "python-netifaces", "python-nose", "python-nose-exclude", "python-pastedeploy", "python-pbr", "python-pyeclib", "python-setuptools", "python-swiftclient", "python-unittest2", "python-xattr"]
+  when: test_func_run
+- name: Create temp dir for testing
+  tempfile:
+    state: directory
+  register: temp_dir
+  when: test_func_run
+- name: Download swift source code
+  git:
+    repo: "https://github.com/openstack/swift.git"
+    dest: "{{ temp_dir.path }}"
+  when: test_func_run
+- name: Download test excludes
+  command: "wget https://raw.githubusercontent.com/troubling/hummingbird/master/.swift_func_excludes"
+  args:
+    chdir: "{{ temp_dir.path }}"
+  when: test_func_run
+- name: Create /etc/swift
+  file:
+    path: /etc/swift
+    mode: 0755
+    state: directory
+  when: test_func_run
+- name: copy func test config
+  template:
+    src: templates/test.conf.j2
+    dest: /etc/swift/test.conf
+    mode: 0644
+    owner: hummingbird
+    group: hummingbird
+  when: test_func_run
+- name: Run swift functional tests
+  command: "nosetests --exclude-test-file={{ temp_dir.path }}/.swift_func_excludes"
+  args:
+    chdir: "{{ temp_dir.path }}/test/functional"
+  register: functional_out
+  when: test_func_run
+- name: Show functional test results
+  debug:
+    var: functional_out.stderr_lines
+  when: test_func_run
+- name: Clean up
+  file:
+    path: "{{ temp_dir.path }}"
+    state: absent
