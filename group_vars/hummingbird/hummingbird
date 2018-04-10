@@ -72,9 +72,9 @@ hash_suffix: changeme
 #account_ring_min_part_hours: 168
 
 # Storage policy definitions
-# The following is a standard 3 replica storage policy
-storage_policy_name: Storage
-storage_policy_type: replication
+# The following is the default 3 replica storage policy
+# storage_policy_name: Storage
+# storage_policy_type: replication
 
 # The following is an example of an EC storage policy
 # storage_policy_name: HEC
