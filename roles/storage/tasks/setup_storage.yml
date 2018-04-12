@@ -19,6 +19,10 @@
   when:
     - parted_result.disk.table != "gpt"
     - parted_result.partitions|length != 1 or (parted_result.partitions|length == 1 and parted_result.partitions[0].fstype != "xfs")
+- name: Stop all services when reseting drives
+  systemd:
+    name: hummingbird-*
+    state: stopped
 - name: Unmount filesystems
   mount:
     path: /srv/node/{{device}}1
