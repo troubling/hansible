@@ -29,7 +29,7 @@
     fstype: xfs
     dev: /dev/{{device}}1
     force: "{{ reset }}"
-    opts: "-L {{device}}1"
+    opts: "-L {{device}}1 -n ftype=1"
 - name: Create dirs for mounts
   file:
     path: /srv/node/{{device}}1
