@@ -1,51 +1,53 @@
 
 ---
-- name: Query partition info
-  parted:
-    device: /dev/{{device}}
-    state: info
-  register: parted_result
-- name: Ensure xfsprogs is installed
-  apt:
-    name: xfsprogs
-    state: latest
-- name: Create XFS partitions
-  parted:
-    device: /dev/{{device}}
-    label: gpt
-    number: 1
-    part_type: primary
-    state: present
-  when:
-    - parted_result.disk.table != "gpt"
-    - parted_result.partitions|length != 1 or (parted_result.partitions|length == 1 and parted_result.partitions[0].fstype != "xfs")
-- name: Unmount filesystems
-  mount:
-    path: /srv/node/{{device}}1
-    state: absent
-  when: reset == "yes"
-- name: Create XFS filesystems
-  filesystem:
-    fstype: xfs
-    dev: /dev/{{device}}1
-    force: "{{ reset }}"
-    opts: "-L {{device}}1 -n ftype=1"
-- name: Create dirs for mounts
-  file:
-    path: /srv/node/{{device}}1
-    state: directory
-    mode: 0755
-    owner: root
-    group: root
-- name: Mount filesystems
-  mount:
-    path: /srv/node/{{device}}1
-    src: "LABEL={{device}}1"
-    fstype: xfs
-    opts: "noatime,nodiratime,nobarrier"
-    state: mounted
-- name: Set permissions of mounted dirs
-  file:
-    path: /srv/node/{{device}}1
-    owner: hummingbird
-    group: hummingbird
+- block: 
+  - name: Query partition info
+    parted:
+      device: /dev/{{device}}
+      state: info
+    register: parted_result
+  - name: Ensure xfsprogs is installed
+    apt:
+      name: xfsprogs
+      state: latest
+  - name: Create XFS partitions
+    parted:
+      device: /dev/{{device}}
+      label: gpt
+      number: 1
+      part_type: primary
+      state: present
+    when:
+      - parted_result.disk.table != "gpt"
+      - parted_result.partitions|length != 1 or (parted_result.partitions|length == 1 and parted_result.partitions[0].fstype != "xfs")
+  - name: Unmount filesystems
+    mount:
+      path: /srv/node/{{device}}1
+      state: absent
+    when: reset == "yes"
+  - name: Create XFS filesystems
+    filesystem:
+      fstype: xfs
+      dev: /dev/{{device}}1
+      force: "{{ reset }}"
+      opts: "-L {{device}}1 -n ftype=1"
+  - name: Create dirs for mounts
+    file:
+      path: /srv/node/{{device}}1
+      state: directory
+      mode: 0755
+      owner: root
+      group: root
+  - name: Mount filesystems
+    mount:
+      path: /srv/node/{{device}}1
+      src: "LABEL={{device}}1"
+      fstype: xfs
+      opts: "noatime,nodiratime,nobarrier"
+      state: mounted
+  - name: Set permissions of mounted dirs
+    file:
+      path: /srv/node/{{device}}1
+      owner: hummingbird
+      group: hummingbird
+  ignore_errors: "{{ignore_setup_storage_errors == \"yes\"}}"
