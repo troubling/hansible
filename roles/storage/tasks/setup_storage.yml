@@ -1,6 +1,6 @@
 
 ---
-- block: 
+- block:
   - name: Query partition info
     parted:
       device: /dev/{{device}}

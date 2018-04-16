@@ -56,7 +56,7 @@
       delegate_facts: True
     - set_fact: object_ring_devices="{{ result.stdout | from_json |  json_query('[*].Device')}}"
     - name: Add devices to object ring
-      command: hummingbird ring /etc/hummingbird/object.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ object_port | default(6000) }}/{{ item }} {{ hostvars[inventory_hostname]["ansible_devices"][ansible_local.devmap[item]]["size"] | human_to_bytes/1024/1024/1024 | round }}
+      command: hummingbird ring /etc/hummingbird/object.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ object_port | default(6000) }}/{{ item }}1 {{ hostvars[inventory_hostname]["ansible_devices"][ansible_local.devmap[item]]["size"] | human_to_bytes/1024/1024/1024 | round }}
       with_items: "{{ object_devs | default(storage_devs) }}"
       when: item not in object_ring_devices and state != "remove" and ansible_local.devmap[item] is defined
       delegate_to: 127.0.0.1
@@ -73,7 +73,7 @@
       delegate_facts: True
     - set_fact: container_ring_devices="{{ result.stdout | from_json |  json_query('[*].Device')}}"
     - name: Add devices to container ring
-      command: hummingbird ring /etc/hummingbird/container.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ container_port | default(6001) }}/{{ item }} {{ hostvars[inventory_hostname]["ansible_devices"][ansible_local.devmap[item]]["size"] | human_to_bytes/1024/1024/1024 | round }}
+      command: hummingbird ring /etc/hummingbird/container.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ container_port | default(6001) }}/{{ item }}1 {{ hostvars[inventory_hostname]["ansible_devices"][ansible_local.devmap[item]]["size"] | human_to_bytes/1024/1024/1024 | round }}
       with_items: "{{ container_devs | default(storage_devs) }}"
       when: item not in container_ring_devices and state != "remove" and ansible_local.devmap[item] is defined
       delegate_to: 127.0.0.1
@@ -90,7 +90,7 @@
       delegate_facts: True
     - set_fact: account_ring_devices="{{ result.stdout | from_json |  json_query('[*].Device')}}"
     - name: Add devices to account ring
-      command: hummingbird ring /etc/hummingbird/account.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ account_port | default(6002) }}/{{ item }} {{ hostvars[inventory_hostname]["ansible_devices"][ansible_local.devmap[item]]["size"] | human_to_bytes/1024/1024/1024 | round}}
+      command: hummingbird ring /etc/hummingbird/account.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ account_port | default(6002) }}/{{ item }}1 {{ hostvars[inventory_hostname]["ansible_devices"][ansible_local.devmap[item]]["size"] | human_to_bytes/1024/1024/1024 | round}}
       with_items: "{{ account_devs | default(storage_devs) }}"
       when: item not in account_ring_devices and state != "remove" and ansible_local.devmap[item] is defined
       delegate_to: 127.0.0.1
