@@ -6,10 +6,10 @@
     mode: 0755
     owner: hummingbird
     group: hummingbird
-- name: Copy /etc/hummingbird/andrewd.conf
+- name: Copy /etc/hummingbird/andrewd-server.conf
   copy:
-    src: etc/andrewd.conf
-    dest: /etc/hummingbird/andrewd.conf
+    src: etc/andrewd-server.conf
+    dest: /etc/hummingbird/andrewd-server.conf
     mode: 0644
     owner: hummingbird
     group: hummingbird
