@@ -26,13 +26,30 @@
     - name: Create object ring
       command: hummingbird ring /etc/hummingbird/object.builder create {{object_ring_part_power | default(22)}} {{object_ring_replicas | default(3)}} {{object_ring_min_part_hours | default(168)}}
       when: not object_builder.stat.exists
+    - name: Set object ring perms
+      file: 
+        path: /etc/hummingbird/object.builder
+        owner: hummingbird
+        group: hummingbird
+      when: not object_builder.stat.exists
     - name: Create container ring
       command: hummingbird ring /etc/hummingbird/container.builder create {{container_ring_part_power | default(22)}} {{container_ring_replicas | default(3)}} {{container_ring_min_part_hours | default(168)}}
+      when: not container_builder.stat.exists
+    - name: Set container ring perms
+      file:
+        path: /etc/hummingbird/container.builder
+        owner: hummingbird
+        group: hummingbird
       when: not container_builder.stat.exists
     - name: Create account ring
       command: hummingbird ring /etc/hummingbird/account.builder create {{account_ring_part_power | default(22)}} {{account_ring_replicas | default(3)}} {{account_ring_min_part_hours | default(168)}}
       when: not account_builder.stat.exists
-
+    - name: Set account ring perms
+      file:
+        path: /etc/hummingbird/account.builder
+        owner: hummingbird
+        group: hummingbird
+      when: not account_builder.stat.exists
 
 - hosts: hummingbird
   serial: 1
@@ -107,7 +124,29 @@
   tasks:
     - name: Rebalance object ring
       command: hummingbird ring /etc/hummingbird/object.builder rebalance
+    - name: Set object ring perms
+      file:
+        path: /etc/hummingbird/object.ring.gz
+        owner: hummingbird
+        group: hummingbird
     - name: Rebalance container ring
       command: hummingbird ring /etc/hummingbird/container.builder rebalance
+    - name: Set container ring perms
+      file:
+        path: /etc/hummingbird/container.ring.gz
+        owner: hummingbird
+        group: hummingbird
     - name: Rebalance account ring
       command: hummingbird ring /etc/hummingbird/account.builder rebalance
+    - name: Set account ring perms
+      file:
+        path: /etc/hummingbird/account.ring.gz
+        owner: hummingbird
+        group: hummingbird
+    - name: Set backup perms
+      file:
+        path: /etc/hummingbird/backups
+        state: directory
+        owner: hummingbird
+        group: hummingbird
+        recurse: yes
