@@ -1,3 +1,4 @@
 ---
 reset: "no"
 setup_storage: True
+ignore_setup_storage_errors: "no"
