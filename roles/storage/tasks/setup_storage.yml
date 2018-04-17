@@ -1,4 +1,3 @@
-
 ---
 - block:
   - name: Query partition info
@@ -21,10 +20,9 @@
       - parted_result.disk.table != "gpt"
       - parted_result.partitions|length != 1 or (parted_result.partitions|length == 1 and parted_result.partitions[0].fstype != "xfs")
   - name: Unmount filesystems
-    mount:
-      path: /srv/node/{{device}}1
-      state: absent
+    command: "umount -f /srv/node/{{device}}1"
     when: reset == "yes"
+    ignore_errors: yes
   - name: Create XFS filesystems
     filesystem:
       fstype: xfs
