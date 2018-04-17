@@ -31,10 +31,10 @@ use_temp_auth: true
 # proxy_obfuscated_prefix: changeme
 
 # Set the following if you are using keystone
-auth_uri: http://127.0.0.1:5000/
-auth_url: http://127.0.0.1:35357/
-authtoken_username: swift
-authtoken_password: password
+#auth_uri: http://127.0.0.1:5000/
+#auth_url: http://127.0.0.1:35357/
+#authtoken_username: swift
+#authtoken_password: password
 
 # Filebeat support
 filebeat_logstash_hosts:
