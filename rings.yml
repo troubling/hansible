@@ -11,23 +11,23 @@
         file: group_vars/hummingbird/hummingbird
   tasks:
     - name: Make sure jmespath is installed
-      apt: 
+      apt:
         name: python-jmespath
         state: present
     - name: Check if object.builder exists
       stat: path=/etc/hummingbird/object.builder
-      register: object_builder 
+      register: object_builder
     - name: Check if container.builder exists
       stat: path=/etc/hummingbird/container.builder
-      register: container_builder 
+      register: container_builder
     - name: Check if account.builder exists
       stat: path=/etc/hummingbird/account.builder
-      register: account_builder 
+      register: account_builder
     - name: Create object ring
       command: hummingbird ring /etc/hummingbird/object.builder create {{object_ring_part_power | default(22)}} {{object_ring_replicas | default(3)}} {{object_ring_min_part_hours | default(168)}}
       when: not object_builder.stat.exists
     - name: Set object ring perms
-      file: 
+      file:
         path: /etc/hummingbird/object.builder
         owner: hummingbird
         group: hummingbird

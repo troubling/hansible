@@ -1,4 +1,8 @@
 ---
+- name: Check if device exists
+  stat:
+    path: /dev/{{device}}
+  register: device_stat
 - block:
   - name: Query partition info
     parted:
@@ -49,3 +53,4 @@
       owner: hummingbird
       group: hummingbird
   ignore_errors: "{{ignore_setup_storage_errors == \"yes\"}}"
+  when: device_stat.stat.exists == True
