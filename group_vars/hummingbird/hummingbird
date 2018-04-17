@@ -27,6 +27,9 @@ proxy_port: 8080
 # Set the following to true if you would like to use tempauth
 use_temp_auth: true
 
+# Set the following to expose metrics/loglevel/profiler info from proxy server
+# proxy_obfuscated_prefix: changeme
+
 # Set the following if you are using keystone
 auth_uri: http://127.0.0.1:5000/
 auth_url: http://127.0.0.1:35357/
