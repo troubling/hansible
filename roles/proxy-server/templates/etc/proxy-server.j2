@@ -3,7 +3,7 @@ bind_ip = 0.0.0.0
 bind_port = {{ proxy_port }}
 log_level = INFO
 user = hummingbird
-tempauth_enabled = {{ use_temp_auth }}
+tempauth_enabled = {{ use_temp_auth | default("false")}}
 obfuscated_prefix = {{ proxy_obfuscated_prefix | default("")}}
 
 [app:proxy-server]

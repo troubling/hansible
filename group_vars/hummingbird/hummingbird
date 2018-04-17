@@ -25,7 +25,7 @@ proxy_port: 8080
 #account_replicator_port: 6502
 
 # Set the following to true if you would like to use tempauth
-use_temp_auth: true
+#use_temp_auth: true
 
 # Set the following to expose metrics/loglevel/profiler info from proxy server
 # proxy_obfuscated_prefix: changeme
