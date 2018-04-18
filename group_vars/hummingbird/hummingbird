@@ -5,8 +5,8 @@
 #hummingbird_version: "dev"
 
 # Devices that will be used for storage
-storage_devs:
-  - "xvdb"
+#storage_devs:
+#  - "xvdb"
 
 # If you use separate devices for separate services define them below (for ring creation):
 #object_devs:
@@ -15,8 +15,8 @@ storage_devs:
 #account_devs:
 #  - "xvdc"
 
-proxy_port: 8080
 # Only change the following if you are not going to use default ports
+#proxy_port: 8080
 #object_port: 6000
 #container_port: 6001
 #account_port: 6002
@@ -37,17 +37,17 @@ proxy_port: 8080
 #authtoken_password: password
 
 # Filebeat support
-filebeat_logstash_hosts:
-  - "localhost"
-filebeat_logging_paths:
-  - paths:
-    - '/var/log/hummingbird/*.log'
+#filebeat_logstash_hosts:
+#  - "localhost"
+#filebeat_logging_paths:
+#  - paths:
+#    - '/var/log/hummingbird/*.log'
 
 # NOTE! The following variables must *NOT* change after the cluster has been deployed for the first time
 
 # The following hash salts should be changed to something unique
-hash_prefix: changeme
-hash_suffix: changeme
+#hash_prefix: changeme
+#hash_suffix: changeme
 
 # This is an example of how you can store secret values in a vault
 # This key has a password of: asdf
@@ -76,17 +76,15 @@ hash_suffix: changeme
 
 # Storage policy definitions
 # The following is the default 3 replica storage policy
-# storage_policy_name: Storage
-# storage_policy_type: replication
+#storage_policy_name: Storage
+#storage_policy_type: replication
 
 # The following is an example of an EC storage policy
-# storage_policy_name: HEC
-# storage_policy_type: hec
-# storage_policy_data_shards: 4
-# storage_policy_parity_shards: 2
-# storage_policy_nursery_replicas: 4
+#storage_policy_name: HEC
+#storage_policy_type: hec
+#storage_policy_data_shards: 4
+#storage_policy_parity_shards: 2
+#storage_policy_nursery_replicas: 4
 
 # Default state of all nodes
 state: "up"
-
-

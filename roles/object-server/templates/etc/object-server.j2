@@ -8,8 +8,8 @@ user = hummingbird
 {% if object_port is defined %}
 bind_port = {{ object_port }}
 {% endif %}
-disk_limit = {{ object_disk_limit | default("100/0") }}
-account_rate_limit = {{ account_rate_limit | default("100/0") }}
+disk_limit = {{ object_disk_limit }}
+account_rate_limit = {{ account_rate_limit }}
 
 [object-replicator]
 {% if object_port is defined or object_replicator_port is defined %}

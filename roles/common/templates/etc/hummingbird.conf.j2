@@ -4,9 +4,9 @@ swift_hash_path_suffix = {{ hash_suffix }}
 
 [storage-policy:0]
 default = yes
-name = {{ storage_policy_name | default("Storage")}}
-policy_type = {{ storage_policy_type | default("replication")}}
-{% if storage_policy_type is defined and storage_policy_type == "hec" %}
+name = {{ storage_policy_name }}
+policy_type = {{ storage_policy_type }}
+{% if storage_policy_type == "hec" %}
 data_shards = {{ storage_policy_data_shards }}
 parity_shards = {{ storage_policy_parity_shards }}
 nursery_replicas = {{ storage_policy_nursery_replicas }}

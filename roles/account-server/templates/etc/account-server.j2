@@ -8,7 +8,7 @@ user = hummingbird
 {% if account_port is defined %}
 bind_port = {{ account_port }}
 {% endif %}
-disk_limit = {{ account_disk_limit | default ("100/0") }}
+disk_limit = {{ account_disk_limit }}
 
 [account-replicator]
 {% if account_port is defined or account_replicator_port is defined %}

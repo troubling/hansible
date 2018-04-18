@@ -1,4 +1,4 @@
 ---
-keystone_swift_endpoint: 127.0.0.1:8080
+#keystone_swift_endpoint: 127.0.0.1:8080
 # Turn it to true if you want to serve Keystone with TLS
-use_tls: false
+#use_tls: false
