@@ -1,11 +1,11 @@
 [bench]
-auth = {{ test_auth_uri | default("http://127.0.0.1:8080/auth/v1.0") }}
-user = {{ test_auth_user | default("test:tester") }}
-key = {{ test_auth_key | default("testing") }}
-concurrency = {{ test_bench_concurrency | default("10") }}
-object_size = {{ test_bench_object_size | default("1024") }}
-num_objects = {{ test_bench_num_objects | default("100") }}
-num_gets = {{ test_bench_num_gets | default("300") }}
-delete = {{ test_bench_delete | default("yes") }}
-allow_insecure_auth_cert = {{ test_bench_allow_insecure_auth_cert | default("no") }}
-single_container = {{ test_bench_single_container | default("no") }}
+auth = {{ test_auth_uri }}
+user = {{ test_auth_user }}
+key = {{ test_auth_key }}
+concurrency = {{ test_bench_concurrency }}
+object_size = {{ test_bench_object_size }}
+num_objects = {{ test_bench_num_objects }}
+num_gets = {{ test_bench_num_gets }}
+delete = {{ test_bench_delete }}
+allow_insecure_auth_cert = {{ test_bench_allow_insecure_auth_cert }}
+single_container = {{ test_bench_single_container }}
