@@ -1,0 +1,2 @@
+object_disk_limit: "100/0"
+account_rate_limit: "100/0"

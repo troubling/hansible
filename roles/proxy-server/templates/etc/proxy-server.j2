@@ -3,8 +3,8 @@ bind_ip = 0.0.0.0
 bind_port = {{ proxy_port }}
 log_level = INFO
 user = hummingbird
-tempauth_enabled = {{ use_temp_auth | default("false")}}
-obfuscated_prefix = {{ proxy_obfuscated_prefix | default("")}}
+tempauth_enabled = {{ use_temp_auth }}
+obfuscated_prefix = {{ proxy_obfuscated_prefix }}
 
 [app:proxy-server]
 allow_account_management = true
@@ -50,8 +50,8 @@ allow_names_in_acls = false
 [filter:proxy-logging]
 
 [filter:ratelimit]
-account_db_max_writes_per_sec = {{ account_db_max_writes_per_sec | default(100) }}
-container_db_max_writes_per_sec = {{ container_db_max_writes_per_sec | default(100) }}
+account_db_max_writes_per_sec = {{ account_db_max_writes_per_sec }}
+container_db_max_writes_per_sec = {{ container_db_max_writes_per_sec }}
 
 [filter:dlo]
 

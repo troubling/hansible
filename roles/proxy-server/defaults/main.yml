@@ -1,0 +1,5 @@
+use_temp_auth: "false"
+proxy_obfuscated_prefix: ""
+account_db_max_writes_per_sec: 100
+container_db_max_writes_per_sec: 100
+proxy_port: 8080

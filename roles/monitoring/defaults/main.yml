@@ -1,2 +1,65 @@
 ---
 docker_compose_version: 1.17.1
+# config.monitoring
+grafana_admin_user: admin
+# This key has a password of: asdf
+grafana_admin_password: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      61313965626464346263363265323135333966353864363762636334396439316535366232366361
+      3433636536343337653132393831386234666664353933340a663138396237356639343963326636
+      30343336663361353230623663633737376233313566653761393836343739636631623965366437
+      6665323161613261350a636464383661636661653235356338643232333066643933303163386461
+      6630
+# alertmanager.yml
+alertmanager_route:
+  receiver: slack
+alertmanager_receivers:
+- name: 'slack'
+  slack_configs:
+      - send_resolved: true
+        text: "{{ '{{' }} .CommonAnnotations.description {{ '{{' }}"
+        username: 'Prometheus'
+        channel: '#<channel-name>'
+        api_url: 'https://hooks.slack.com/services/<webhook-id>'
+# prometheus.yml
+prometheus_scrape_configs:
+- job_name: prometheus
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+    - targets:
+      - localhost:9090
+- job_name: proxy
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+    - targets:
+      - <target_ip>:8080
+- job_name: account
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+    - targets:
+      - <target_ip>:6002
+- job_name: container
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+    - targets:
+      - <target_ip>:6001
+- job_name: object
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+    - targets:
+      - <target_ip>:6000
