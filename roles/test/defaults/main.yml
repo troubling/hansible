@@ -1,0 +1,14 @@
+---
+test_bench_run: true
+test_func_run: true
+# The following are the default values used during smoke testing
+test_auth_uri: http://127.0.0.1:8080/auth/v1.0
+test_auth_user: "test:tester"
+test_auth_key: "testing"
+test_bench_concurrency: 10
+test_bench_object_size: 1024
+test_bench_num_objects: 100
+test_bench_num_gets: 100
+test_bench_allow_insecure_auth_cert: "no"
+test_bench_single_container: "no"
+test_bench_delete: "yes"

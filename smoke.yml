@@ -1,0 +1,7 @@
+---
+- hosts: test
+  become: yes
+  roles:
+    - role: common
+      binary_only: yes
+    - role: test

@@ -1,0 +1,11 @@
+---
+#test_bench_run: true  # Set this to false if you don't want smoke tests to run a benchmark
+#test_func_run: true  # Set this to false if you don't want functional tests to run
+# The following are the default values used during smoke testing
+#test_auth_uri: http://127.0.0.1:8080/auth/v1.0
+#test_auth_user: "test:tester"
+#test_auth_key: "testing"
+#test_bench_concurrency: 10
+#test_bench_object_size: 1024
+#test_bench_num_objects: 100
+#test_bench_num_gets: 100
