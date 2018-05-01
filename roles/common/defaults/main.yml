@@ -3,6 +3,6 @@ hash_prefix: "changeme"
 hash_suffix: "changeme"
 storage_policy_name: "Storage"
 storage_policy_type: "replication"
-storage_policy_data_shards: 3
+storage_policy_data_shards: 4
 storage_policy_parity_shards: 2
 storage_policy_nursery_replicas: 4
