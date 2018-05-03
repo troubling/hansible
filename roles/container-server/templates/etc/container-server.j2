@@ -14,3 +14,13 @@ disk_limit = {{ container_disk_limit }}
 {% if container_port is defined or container_replicator_port is defined %}
 bind_port = {{ container_replicator_port | default(container_port + 500) }}
 {% endif %}
+
+{% if tracing_enabled %}
+[tracing]
+agent_host_port = {{ tracing_agent_host_port }}
+#disabled = false
+sampler_type = {{ tracing_sampler_type }}
+sampler_param = {{ tracing_sampler_param }}
+reporter_log_spans = {{ tracing_reporter_log_spans }}
+enable_httptrace = {{ tracing_enable_httptrace }}
+{% endif %}

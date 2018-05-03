@@ -88,3 +88,12 @@ hummingbird_version: "dev"
 
 # Default state of all nodes
 state: "up"
+
+# Opentracing config.
+#tracing_enabled: false
+#tracing_agent_host_port: "localhost:6831"
+#tracing_sampler_type: ratelimiting
+#tracing_sampler_param: 2.0
+#tracing_reporter_log_spans: false
+#tracing_enable_httptrace: true
+

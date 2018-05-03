@@ -14,3 +14,13 @@ disk_limit = {{ account_disk_limit }}
 {% if account_port is defined or account_replicator_port is defined %}
 bind_port = {{ account_replicator_port | default(account_port + 500) }}
 {% endif %}
+
+{% if tracing_enabled %}
+[tracing]
+agent_host_port = {{ tracing_agent_host_port }}
+#disabled = false
+sampler_type = {{ tracing_sampler_type }}
+sampler_param = {{ tracing_sampler_param }}
+reporter_log_spans = {{ tracing_reporter_log_spans }}
+enable_httptrace = {{ tracing_enable_httptrace }}
+{% endif %}
