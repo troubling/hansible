@@ -1,2 +1,8 @@
 account_disk_limit: "100/0"
 
+tracing_enabled: false
+tracing_agent_host_port: 127.0.0.1:6831
+tracing_sampler_type: ratelimiting
+tracing_sampler_param: 2.0
+tracing_reporter_log_spans: false
+tracing_enable_httptrace: true

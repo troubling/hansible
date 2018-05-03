@@ -17,3 +17,13 @@ bind_port = {{ object_replicator_port | default(object_port + 500) }}
 {% endif %}
 
 [object-auditor]
+
+{% if tracing_enabled %}
+[tracing]
+agent_host_port = {{ tracing_agent_host_port }}
+#disabled = false
+sampler_type = {{ tracing_sampler_type }}
+sampler_param = {{ tracing_sampler_param }}
+reporter_log_spans = {{ tracing_reporter_log_spans }}
+enable_httptrace = {{ tracing_enable_httptrace }}
+{% endif %}
