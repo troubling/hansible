@@ -23,7 +23,7 @@ The following ring properties can be set in `group_vars/hummingbird/hummingbird`
 
 | Var                           | Definition                               | Default |
 | ----------------------------- | ---------------------------------------- | ------- |
-| object_ring_replicas          | Number of replicas in the object ring    | 3       |
+| object_ring_replicas          | Number of replicas in the object ring    | 6       |
 | container_ring_replicas       | Number of replicas in the container ring | 3       |
 | account_ring_replicas         | Number of replicas in the account ring   | 3       |
 | object_ring_part_power        | Partition power of the object ring       | 22      |

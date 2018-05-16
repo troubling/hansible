@@ -24,7 +24,7 @@
       stat: path=/etc/hummingbird/account.builder
       register: account_builder
     - name: Create object ring
-      command: hummingbird ring /etc/hummingbird/object.builder create {{object_ring_part_power | default(22)}} {{object_ring_replicas | default(3)}} {{object_ring_min_part_hours | default(168)}}
+      command: hummingbird ring /etc/hummingbird/object.builder create {{object_ring_part_power | default(22)}} {{object_ring_replicas | default(6)}} {{object_ring_min_part_hours | default(168)}}
       when: not object_builder.stat.exists
     - name: Set object ring perms
       file:
