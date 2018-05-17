@@ -98,6 +98,11 @@
     owner: hummingbird
     group: hummingbird
   when: binary_only is not defined
+- name: Install rsyslog service
+  package:
+    name: rsyslog
+    state: present
+  when: binary_only is not defined
 - name: Create /var/log/hummingbird
   file:
     path: /var/log/hummingbird
@@ -105,11 +110,6 @@
     mode: 0755
     owner: syslog
     group: adm
-  when: binary_only is not defined
-- name: Install rsyslog
-  apt:
-    name: rsyslog
-    state: present
   when: binary_only is not defined
 - name: Copy rsyslog config
   copy:
