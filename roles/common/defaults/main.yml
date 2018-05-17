@@ -5,4 +5,4 @@ storage_policy_name: "HEC"
 storage_policy_type: "hec"
 storage_policy_data_shards: 4
 storage_policy_parity_shards: 2
-storage_policy_nursery_replicas: 4
+storage_policy_nursery_replicas: 3

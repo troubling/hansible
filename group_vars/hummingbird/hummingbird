@@ -84,7 +84,7 @@ hummingbird_version: "dev"
 #storage_policy_type: hec
 #storage_policy_data_shards: 4
 #storage_policy_parity_shards: 2
-#storage_policy_nursery_replicas: 4
+#storage_policy_nursery_replicas: 3
 
 # Default state of all nodes
 state: "up"
