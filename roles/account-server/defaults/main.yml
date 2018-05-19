@@ -1,4 +1,4 @@
-account_disk_limit: "100/0"
+account_disk_limit: "0/0"
 
 tracing_enabled: false
 tracing_agent_host_port: 127.0.0.1:6831
