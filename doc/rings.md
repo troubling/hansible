@@ -26,9 +26,9 @@ The following ring properties can be set in `group_vars/hummingbird/hummingbird`
 | object_ring_replicas          | Number of replicas in the object ring    | 6       |
 | container_ring_replicas       | Number of replicas in the container ring | 3       |
 | account_ring_replicas         | Number of replicas in the account ring   | 3       |
-| object_ring_part_power        | Partition power of the object ring       | 22      |
-| container_ring_part_power     | Partition power of the container ring    | 22      |
-| account_ring_part_power       | Partition power of the account ring      | 22      |
+| object_ring_part_power        | Partition power of the object ring       | 20      |
+| container_ring_part_power     | Partition power of the container ring    | 20      |
+| account_ring_part_power       | Partition power of the account ring      | 20      |
 | object_ring_min_part_hours    | min_part_hours for the object ring       | 168     |
 | container_ring_min_part_hours | min_part_hours for the container ring    | 168     |
 | account_ring_min_part_hours   | min_part_hours for the account ring      | 168     |

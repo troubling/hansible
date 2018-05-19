@@ -64,10 +64,10 @@ hummingbird_version: "dev"
 #container_ring_replicas: 3
 #account_ring_replicas: 3
 
-# Set the following to change the part power for a ring (the default is 22)
-#object_ring_part_power: 22
-#container_ring_part_power: 22
-#account_ring_part_power: 22
+# Set the following to change the part power for a ring (the default is 20)
+#object_ring_part_power: 20
+#container_ring_part_power: 20
+#account_ring_part_power: 20
 
 # Set the following to change the min part hours for a ring (the default is 168)
 #object_ring_min_part_hours: 168
