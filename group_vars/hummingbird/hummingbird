@@ -59,15 +59,15 @@ hummingbird_version: "dev"
 #      3331323161313930370a616536316165383263386566656233303239306638643964303365373962
 #      65333264613738343936373831663366353663356135303530376434636262656630
 
-# Set the following to change the number of replicas for a ring (the default is 3)
-#object_ring_replicas: 3
+# Set the following to change the number of replicas for a ring (the default is 6)
+#object_ring_replicas: 6
 #container_ring_replicas: 3
 #account_ring_replicas: 3
 
-# Set the following to change the part power for a ring (the default is 22)
-#object_ring_part_power: 22
-#container_ring_part_power: 22
-#account_ring_part_power: 22
+# Set the following to change the part power for a ring (the default is 20)
+#object_ring_part_power: 20
+#container_ring_part_power: 20
+#account_ring_part_power: 20
 
 # Set the following to change the min part hours for a ring (the default is 168)
 #object_ring_min_part_hours: 168
@@ -84,7 +84,7 @@ hummingbird_version: "dev"
 #storage_policy_type: hec
 #storage_policy_data_shards: 4
 #storage_policy_parity_shards: 2
-#storage_policy_nursery_replicas: 4
+#storage_policy_nursery_replicas: 3
 
 # Default state of all nodes
 state: "up"
