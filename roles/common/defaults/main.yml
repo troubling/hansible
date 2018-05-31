@@ -1,4 +1,4 @@
-hummingbird_version: "dev"
+hummingbird_version: "v1.4.0"
 hash_prefix: "changeme"
 hash_suffix: "changeme"
 storage_policy_name: "HEC"
