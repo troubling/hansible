@@ -103,3 +103,16 @@ Example:
 `hummingbird_version: "v0.0.2"`
 
 When it is time to upgrade to "v0.0.3" simply update your group_vars/hummingbird/hummingbird and rerun the playbook. Services will be reloaded after the new binary is downloaded. If an upgrade requires additional steps, they will be documented in the hummingbird release notes.
+
+Adding and Removing Nodes
+-------------------------
+
+Adding and removing nodes is a simple as removing and adding nodes to the inventory for the deployment.  The following assumes that new hardware is already setup and properly configured.
+
+Once the deployment's inventory is updated, make the new rings:
+
+`ansible-playbook -i hosts ring.yml`
+
+Once the rings are updated, then you can install hummingbird on the new nodes and deploy the updated rings:
+
+`ansible-playbook -i hosts hummingbird.yml`
