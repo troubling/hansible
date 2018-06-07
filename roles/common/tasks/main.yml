@@ -89,7 +89,6 @@
     mode: 0644
     owner: hummingbird
     group: hummingbird
-  when: binary_only is not defined
 - name: Create /var/cache/swift
   file:
     path: /var/cache/swift
