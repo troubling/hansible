@@ -1,4 +1,4 @@
 - hosts: hummingbird
   become: yes
   roles:
-     - { role: "filebeat" }
+    - { role: "hummingbird-filebeat" }

@@ -3,7 +3,7 @@
   become: yes
   connection: local
   roles:
-    - role: common
+    - role: hummingbird-common
       binary_only: yes
   pre_tasks:
     - name: Load hummingbird vars

@@ -1,5 +1,5 @@
 ---
-- hosts: keystone
+- hosts: hummingbird-keystone
   become: yes
   roles:
-    - dockerized-keystone
+    - hummingbird-dockerized-keystone
