@@ -13,6 +13,12 @@
     apt:
       name: xfsprogs
       state: latest
+  - name: Ensure Hummingbird is not running
+    systemd:
+      name: hummingbird-*
+      state: stopped
+    when: reset == "yes"
+    ignore_errors: yes
   - name: Create XFS partitions
     parted:
       device: /dev/{{device}}
