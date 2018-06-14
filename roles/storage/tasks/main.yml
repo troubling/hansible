@@ -1,7 +1,7 @@
 ---
 - include: setup_storage.yml device={{item}}
   when: setup_storage
-  with_items: "{{ storage_devs }}"
+  with_items: "{{ storage_devs | union(object_devs) | union(container_devs) | union(account_devs)}}"
   
 - include: set_permissions_only.yml
   when: not setup_storage

@@ -1,4 +1,7 @@
 reset: "no"
 setup_storage: True
 ignore_setup_storage_errors: "no"
-storage_devs: ["xvdb", ]
+storage_devs: []
+object_devs: []
+container_devs: []
+account_devs: []
