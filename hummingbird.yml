@@ -13,4 +13,5 @@
 - hosts: hummingbird-andrewd
   become: yes
   roles:
+    - { role: hummingbird-common, binary_only: yes, tags: ['common'] }
     - { role: hummingbird-andrewd, tags: ['andrewd'] }

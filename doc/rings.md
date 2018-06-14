@@ -4,7 +4,12 @@ Managing Hummingbird Rings with Hansible
 Adding Nodes to the Ring
 ------------------------
 
-Adding nodes to the ring is as simple as adding the new node in the inventory and running the `rings.yml` playbook.
+Adding nodes to the ring is as simple as adding the new node in the inventory and running the `rings.yml` playbook.  If you are using a separate replication network, make sure you set the `replication_ip` variable for each node.  For example a node with a service ip of `10.1.1.10` and a repliaction ip of `10.2.2.10` would look like:
+
+```
+[hummingbird]
+10.1.1.10 service_ip=10.1.1.10 replication_ip=10.2.2.10
+```
 
 Removing Nodes from the Ring
 ----------------------------

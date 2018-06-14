@@ -4,4 +4,4 @@
      path: /srv/node/{{item}}1
      owner: hummingbird
      group: hummingbird
-  with_items: "{{ storage_devs }}"
+  with_items: "{{ storage_devs | union(object_devs) | union(container_devs) | union(account_devs)}}"
