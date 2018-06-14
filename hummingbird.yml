@@ -13,4 +13,5 @@
 - hosts: andrewd
   become: yes
   roles:
+    - { role: common, binary_only: yes, tags: ['common'] }
     - { role: andrewd, tags: ['andrewd'] }
