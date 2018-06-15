@@ -4,6 +4,10 @@
     path: /dev/{{device}}
   register: device_stat
 - block:
+  - name: Ensure parted is installed
+    apt:
+      name: parted
+      state: present
   - name: Query partition info
     parted:
       device: /dev/{{device}}
