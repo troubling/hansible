@@ -3,6 +3,10 @@
 #   service_ip: the ip you want non-public services to run on
 127.0.0.1 service_ip=127.0.0.1 ansible_connection=local
 
+[admin]
+# Host that will manage rings
+127.0.0.1 ansible_connection=local
+
 [keystone]
 # If you want to use dockerized keystone, put that host here
 #127.0.0.1 service_ip=127.0.0.1 ansible_connection=local

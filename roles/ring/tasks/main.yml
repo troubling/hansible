@@ -1,22 +1,22 @@
 ---
 - name: Copy account rings
-  copy:
+  synchronize:
     src: /etc/hummingbird/account.ring.gz
     dest: /etc/hummingbird/account.ring.gz
-    mode: 0644
-    owner: hummingbird
-    group: hummingbird
+    owner: yes
+    group: yes
+  delegate_to: "{{ groups.admin[0] }}"
 - name: Copy container rings
-  copy:
+  synchronize:
     src: /etc/hummingbird/container.ring.gz
     dest: /etc/hummingbird/container.ring.gz
-    mode: 0644
-    owner: hummingbird
-    group: hummingbird
+    owner: yes
+    group: yes
+  delegate_to: "{{ groups.admin[0] }}"
 - name: Copy object rings
-  copy:
+  synchronize:
     src: /etc/hummingbird/object.ring.gz
     dest: /etc/hummingbird/object.ring.gz
-    mode: 0644
-    owner: hummingbird
-    group: hummingbird
+    owner: yes
+    group: yes
+  delegate_to: "{{ groups.admin[0] }}"
