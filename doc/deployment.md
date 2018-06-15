@@ -74,7 +74,7 @@ filebeat_logging_paths:
 Create the Initial Rings
 ------------------------
 
-Rings will be created in the `/etc/hummingbird` directory on the current machine.  It is *VERY* important to keep backups of the `.builder` files as they will be needed when future ring changes are made.
+Rings will be created in the `/etc/hummingbird` directory on the first node in the `[admin]` group.  It is *VERY* important to keep backups of the `.builder` files as they will be needed when future ring changes are made.
 
 The `rings.yml` playbook will create a ring with each node in a separate zone.  It is also important that all machines in the cluster are available when running this playbook so that it can detect the device sizes to set a proper weight.
 
