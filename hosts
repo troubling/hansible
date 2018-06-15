@@ -7,6 +7,11 @@
 # If you want to use dockerized keystone, put that host here
 #127.0.0.1 service_ip=127.0.0.1 ansible_connection=local
 
+[hummingbird-admin]
+# Host that will manage rings
+127.0.0.1 ansible_connection=local
+
+
 [hummingbird-monitoring]
 # If you would like to set up a dockerized grafana for monitoring, put that host here
 #127.0.0.1 service_ip=127.0.0.1 ansible_connection=local
