@@ -5,18 +5,18 @@
     dest: /etc/hummingbird/account.ring.gz
     owner: yes
     group: yes
-  delegate_to: "{{ groups.admin[0] }}"
+  delegate_to: "{{ groups['hummingbird-admin'][0] }}"
 - name: Copy container rings
   synchronize:
     src: /etc/hummingbird/container.ring.gz
     dest: /etc/hummingbird/container.ring.gz
     owner: yes
     group: yes
-  delegate_to: "{{ groups.admin[0] }}"
+  delegate_to: "{{ groups['hummingbird-admin'][0] }}"
 - name: Copy object rings
   synchronize:
     src: /etc/hummingbird/object.ring.gz
     dest: /etc/hummingbird/object.ring.gz
     owner: yes
     group: yes
-  delegate_to: "{{ groups.admin[0] }}"
+  delegate_to: "{{ groups['hummingbird-admin'][0] }}"

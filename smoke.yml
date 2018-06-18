@@ -1,7 +1,7 @@
 ---
-- hosts: test
+- hosts: hummingbird-test
   become: yes
   roles:
-    - role: common
+    - role: hummingbird-common
       binary_only: yes
-    - role: test
+    - role: hummingbird-test

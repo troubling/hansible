@@ -2,4 +2,4 @@
 - hosts: hummingbird
   become: yes
   roles:
-    - certs
+    - hummingbird-certs

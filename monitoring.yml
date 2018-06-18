@@ -1,5 +1,5 @@
 ---
-- hosts: monitoring
+- hosts: hummingbird-monitoring
   become: yes
   roles:
-    - monitoring
+    - hummingbird-monitoring

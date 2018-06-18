@@ -2,16 +2,16 @@
 - hosts: hummingbird
   become: yes
   roles:
-    - { role: common, tags: ['common'] }
-    - { role: filebeat, tags: ['common'] }
-    - { role: storage, tags: ['storage'] }
-    - { role: ring, tags: ['ring'] }
-    - { role: proxy-server, tags: ['proxy-server'] }
-    - { role: account-server, tags: ['account-server'] }
-    - { role: container-server, tags: ['container-server'] }
-    - { role: object-server, tags: ['object-server'] }
-- hosts: andrewd
+    - { role: hummingbird-common, tags: ['common'] }
+    - { role: hummingbird-filebeat, tags: ['common'] }
+    - { role: hummingbird-storage, tags: ['storage'] }
+    - { role: hummingbird-ring, tags: ['ring'] }
+    - { role: hummingbird-proxy-server, tags: ['proxy-server'] }
+    - { role: hummingbird-account-server, tags: ['account-server'] }
+    - { role: hummingbird-container-server, tags: ['container-server'] }
+    - { role: hummingbird-object-server, tags: ['object-server'] }
+- hosts: hummingbird-andrewd
   become: yes
   roles:
-    - { role: common, binary_only: yes, tags: ['common'] }
-    - { role: andrewd, tags: ['andrewd'] }
+    - { role: hummingbird-common, binary_only: yes, tags: ['common'] }
+    - { role: hummingbird-andrewd, tags: ['andrewd'] }

@@ -1,10 +1,13 @@
 ---
-- hosts: "{{ groups.admin[0] }}"
+- hosts: "{{ groups['hummingbird-admin'][0] }}"
   become: yes
   roles:
-    - role: common
+    - role: hummingbird-common
       binary_only: yes
   pre_tasks:
+    - name: Debug
+      debug:
+        var: groups
     - name: Load hummingbird vars
       include_vars:
         file: group_vars/hummingbird/hummingbird
@@ -68,56 +71,56 @@
     - name: Get devices that are already in the object ring for this node
       command: hummingbird ring -json /etc/hummingbird/object.builder search -ip {{service_ip}}
       register: result
-      delegate_to: "{{ groups.admin[0] }}"
+      delegate_to: "{{ groups['hummingbird-admin'][0] }}"
       delegate_facts: True
     - set_fact: object_ring_devices="{{ result.stdout | from_json |  json_query('[*].Device')}}"
     - name: Add devices to object ring
       command: hummingbird ring /etc/hummingbird/object.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ object_port | default(6000) }}R{{ replication_ip | default(service_ip) }}:{{ object_replicator_port | default(6500) }}/{{ item }}1 {{ hostvars[inventory_hostname]["ansible_devices"][ansible_local.devmap[item]]["size"] | human_to_bytes/1024/1024/1024 | round }}
       with_items: "{{ object_devs | default(storage_devs) }}"
       when: item not in object_ring_devices and state != "remove" and ansible_local.devmap[item] is defined
-      delegate_to: "{{ groups.admin[0] }}"
+      delegate_to: "{{ groups['hummingbird-admin'][0] }}"
       delegate_facts: True
     - name: Remove devices from object ring if the node is removed
       command: hummingbird ring /etc/hummingbird/object.builder remove -ip {{service_ip}} -yes
       when: state == "remove"
-      delegate_to: "{{ groups.admin[0] }}"
+      delegate_to: "{{ groups['hummingbird-admin'][0] }}"
       delegate_facts: True
     - name: Get devices that are already in the container ring for this node
       command: hummingbird ring -json /etc/hummingbird/container.builder search -ip {{service_ip}}
       register: result
-      delegate_to: "{{ groups.admin[0] }}"
+      delegate_to: "{{ groups['hummingbird-admin'][0] }}"
       delegate_facts: True
     - set_fact: container_ring_devices="{{ result.stdout | from_json |  json_query('[*].Device')}}"
     - name: Add devices to container ring
       command: hummingbird ring /etc/hummingbird/container.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ container_port | default(6001) }}R{{ replication_ip | default(service_ip) }}:{{ container_replicator_port | default(6501) }}/{{ item }}1 {{ hostvars[inventory_hostname]["ansible_devices"][ansible_local.devmap[item]]["size"] | human_to_bytes/1024/1024/1024 | round }}
       with_items: "{{ container_devs | default(storage_devs) }}"
       when: item not in container_ring_devices and state != "remove" and ansible_local.devmap[item] is defined
-      delegate_to: "{{ groups.admin[0] }}"
+      delegate_to: "{{ groups['hummingbird-admin'][0] }}"
       delegate_facts: True
     - name: Remove devices from container ring if the node is removed
       command: hummingbird ring /etc/hummingbird/container.builder remove -ip {{service_ip}} -yes
       when: state == "remove"
-      delegate_to: "{{ groups.admin[0] }}"
+      delegate_to: "{{ groups['hummingbird-admin'][0] }}"
       delegate_facts: True
     - name: Get devices that are already in the account ring for this node
       command: hummingbird ring -json /etc/hummingbird/account.builder search -ip {{service_ip}}
       register: result
-      delegate_to: "{{ groups.admin[0] }}"
+      delegate_to: "{{ groups['hummingbird-admin'][0] }}"
       delegate_facts: True
     - set_fact: account_ring_devices="{{ result.stdout | from_json |  json_query('[*].Device')}}"
     - name: Add devices to account ring
       command: hummingbird ring /etc/hummingbird/account.builder add r1z{{ groups.hummingbird.index(inventory_hostname)+1 }}-{{ service_ip }}:{{ account_port | default(6002) }}R{{ replication_ip | default(service_ip) }}:{{ account_replicator_port | default(6502) }}/{{ item }}1 {{ hostvars[inventory_hostname]["ansible_devices"][ansible_local.devmap[item]]["size"] | human_to_bytes/1024/1024/1024 | round}}
       with_items: "{{ account_devs | default(storage_devs) }}"
       when: item not in account_ring_devices and state != "remove" and ansible_local.devmap[item] is defined
-      delegate_to: "{{ groups.admin[0] }}"
+      delegate_to: "{{ groups['hummingbird-admin'][0] }}"
       delegate_facts: True
     - name: Remove devices from account ring if the node is removed
       command: hummingbird ring /etc/hummingbird/account.builder remove -ip {{service_ip}} -yes
       when: state == "remove"
-      delegate_to: "{{ groups.admin[0] }}"
+      delegate_to: "{{ groups['hummingbird-admin'][0] }}"
       delegate_facts: True
 
-- hosts: "{{ groups.admin[0] }}"
+- hosts: "{{ groups['hummingbird-admin'][0] }}"
   become: yes
   tasks:
     - name: Rebalance object ring
