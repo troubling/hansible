@@ -1,6 +1,10 @@
 Hansible
 ========
 
+[Deployment of Hummingbird with Ansible](doc/deployment.md)  
+[Managing Hummingbird Rings with Hansible](doc/rings.md)  
+[Creating a hummingbird AIO with hansible](doc/aio.md)  
+
 TL;DR
 -----
 
