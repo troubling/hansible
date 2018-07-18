@@ -102,6 +102,13 @@
     name: rsyslog
     state: present
   when: binary_only is not defined
+- name: Clean up /var/log/hummingbird (on reset)
+  file:
+    path: /var/log/hummingbird
+    state: absent
+  when:
+    - binary_only is not defined
+    - reset == "yes"
 - name: Create /var/log/hummingbird
   file:
     path: /var/log/hummingbird
