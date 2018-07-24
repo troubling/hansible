@@ -75,16 +75,14 @@
 #account_ring_min_part_hours: 168
 
 # Storage policy definitions
-# The following is the default 3 replica storage policy
-#storage_policy_name: Storage
-#storage_policy_type: replication
-
-# The following is an example of an EC storage policy
-#storage_policy_name: HEC
-#storage_policy_type: hec
-#storage_policy_data_shards: 4
-#storage_policy_parity_shards: 2
-#storage_policy_nursery_replicas: 3
+#storage_policies:  
+#  - name: "HEC"  # Default EC Policy
+#    type: "hec"
+#    data_shards: 4
+#    parity_shards: 2
+#    nursery_replicas: 3
+#  - name: "Storage"  # Example of a replication policy
+#    type: "replication"
 
 # Default state of all nodes
 state: "up"

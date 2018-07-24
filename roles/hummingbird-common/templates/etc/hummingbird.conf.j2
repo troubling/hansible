@@ -2,12 +2,14 @@
 swift_hash_path_prefix = {{ hash_prefix }}
 swift_hash_path_suffix = {{ hash_suffix }}
 
-[storage-policy:0]
+{% for policy in storage_policies %}
+[storage-policy:{{loop.index0}}]
 default = yes
-name = {{ storage_policy_name }}
-policy_type = {{ storage_policy_type }}
-{% if storage_policy_type == "hec" %}
-data_shards = {{ storage_policy_data_shards }}
-parity_shards = {{ storage_policy_parity_shards }}
-nursery_replicas = {{ storage_policy_nursery_replicas }}
+name = {{ policy.name }}
+policy_type = {{ policy.type }}
+{% if policy.type == "hec" %}
+data_shards = {{ policy.data_shards }}
+parity_shards = {{ policy.parity_shards }}
+nursery_replicas = {{ policy.nursery_replicas }}
 {% endif %}
+{% endfor %}
