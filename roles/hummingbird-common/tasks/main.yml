@@ -109,6 +109,13 @@
   when:
     - binary_only is not defined
     - reset == "yes"
+- name: Clean up /var/local/hummingbird/andrew.db (on reset)
+  file:
+    path: /var/local/hummingbird/andrew.db
+    state: absent
+  when:
+    - binary_only is not defined
+    - reset == "yes"
 - name: Create /var/log/hummingbird
   file:
     path: /var/log/hummingbird
