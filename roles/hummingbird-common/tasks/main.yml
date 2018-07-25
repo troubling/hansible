@@ -12,7 +12,7 @@
 - name: Configure memcached
   lineinfile:
     path: /etc/memcached.conf
-    regexp: '^127\.0\.0\.1'
+    regexp: '^\-l'
     line: '-l {{ service_ip }}'
   when: binary_only is not defined
 - name: Restart memcached
