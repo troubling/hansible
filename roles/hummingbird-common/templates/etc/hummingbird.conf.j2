@@ -4,7 +4,9 @@ swift_hash_path_suffix = {{ hash_suffix }}
 
 {% for policy in storage_policies %}
 [storage-policy:{{loop.index0}}]
+{% if loop.index0 == 0 %}
 default = yes
+{% endif %}
 name = {{ policy.name }}
 policy_type = {{ policy.type }}
 {% if policy.type == "hec" %}
