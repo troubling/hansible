@@ -1,8 +1,9 @@
 hummingbird_version: "dev"
 hash_prefix: "changeme"
 hash_suffix: "changeme"
-storage_policy_name: "HEC"
-storage_policy_type: "hec"
-storage_policy_data_shards: 4
-storage_policy_parity_shards: 2
-storage_policy_nursery_replicas: 3
+storage_policies:
+  - name: "HEC"
+    type: "hec"
+    data_shards: 4
+    parity_shards: 2
+    nursery_replicas: 3
