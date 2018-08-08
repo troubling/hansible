@@ -66,8 +66,8 @@
 
 # Set the following to change the part power for a ring (the default is 20)
 #object_ring_part_power: 20
-#container_ring_part_power: 20
-#account_ring_part_power: 20
+#container_ring_part_power: 18
+#account_ring_part_power: 18
 
 # Set the following to change the min part hours for a ring (the default is 168)
 #object_ring_min_part_hours: 168
