@@ -35,7 +35,7 @@
         group: hummingbird
       when: not object_builder.stat.exists
     - name: Create container ring
-      command: hummingbird ring /etc/hummingbird/container.builder create {{container_ring_part_power | default(20)}} {{container_ring_replicas | default(3)}} {{container_ring_min_part_hours | default(168)}}
+      command: hummingbird ring /etc/hummingbird/container.builder create {{container_ring_part_power | default(18)}} {{container_ring_replicas | default(3)}} {{container_ring_min_part_hours | default(168)}}
       when: not container_builder.stat.exists
     - name: Set container ring perms
       file:
@@ -44,7 +44,7 @@
         group: hummingbird
       when: not container_builder.stat.exists
     - name: Create account ring
-      command: hummingbird ring /etc/hummingbird/account.builder create {{account_ring_part_power | default(20)}} {{account_ring_replicas | default(3)}} {{account_ring_min_part_hours | default(168)}}
+      command: hummingbird ring /etc/hummingbird/account.builder create {{account_ring_part_power | default(18)}} {{account_ring_replicas | default(3)}} {{account_ring_min_part_hours | default(168)}}
       when: not account_builder.stat.exists
     - name: Set account ring perms
       file:
